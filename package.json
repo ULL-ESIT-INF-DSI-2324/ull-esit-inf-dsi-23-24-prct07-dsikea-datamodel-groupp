@@ -27,9 +27,8 @@
     "nyc": "^15.1.0",
     "prettier": "^3.2.5",
     "ts-node": "^10.9.2",
-    "typedoc": "^0.25.8"
-  },
-  "dependencies": {
+    "typedoc": "^0.25.8",
+    "typescript": "^5.3.3",
     "inquirer": "^7.3.3",
     "lowdb": "^1.0.0"
   }

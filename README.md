@@ -1,6 +1,6 @@
 
 # Practica 7: DSIkea
-<sup>José Javier Ramos Carballo, [alu0101313313@ull.edu.es](https://github.com/alu0101313313)
+<sup>José Javier Ramos Carballo, [alu0101313313@ull.edu.es](https://github.com/alu0101313313)  
 <sup>Daniel Marhuenda Guillén, [alu0101487731@ull.edu.es](https://github.com/alu0101487731)
 
 [![Coverage Status]()]

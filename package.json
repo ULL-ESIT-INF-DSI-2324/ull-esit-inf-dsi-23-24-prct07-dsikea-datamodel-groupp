@@ -6,7 +6,7 @@
   "scripts": {
     "doc": "typedoc",
     "test": "mocha",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls && rm -rf .nyc_output"
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov"
   },
   "keywords": [],
   "author": "",

@@ -1,6 +1,16 @@
 import { Mueble } from "./mueble";
 import { Persona } from "./persona";
 
+/**
+ * Cosas por hacer
+ * Funciones BuscarCliente BuscarProveedor (Por expresiones regulares)
+ * Funcion BuscarMueble información se podrá mostrar ordenada alfabéticamente y por precio, 
+ * tanto ascendente como descendente, en ambos casos.
+ * Informes, todos faltan, cuando alguno hecho porner aquí,
+ * Inquirer.js y Lowdb
+ * Documentación y Sonarcloud
+ */
+
 interface TipoCantidad {
     MuebleID:number;
     Cantidad:number;
@@ -117,7 +127,7 @@ export class Stock{
      * @param cliente Cliente que está comprando.
      * @param ID Mueble que se va a vender.
      */
-    public Vender(cliente:Persona, IDs:TipoCantidad[], fecha:Date):boolean{
+    public RemoverDeStock(cliente:Persona, IDs:TipoCantidad[], fecha:Date):boolean{
 
         //Sección de errores
         for(var ID of IDs){
@@ -133,9 +143,25 @@ export class Stock{
             this.QuitarMueble(ID.MuebleID);
         }
         
-        //Pushear la factura
-        this.transacciones.push({Persona:"Cliente", Cantidades:IDs, PersonaID:cliente.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
-        return true;
+        //La persona es un cliente, cambiar por BuscarCliente
+        for(var i of this.clientes){
+            if(cliente.ID == i.ID){
+                this.transacciones.push({Persona:"Cliente", Cantidades:IDs, PersonaID:cliente.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
+                return true;
+            }
+        }
+
+        //La persona es un proveedor, cambiar por BuscarProveedor
+        for(var i of this.proveedores){
+            if(cliente.ID == i.ID){
+                this.transacciones.push({Persona:"Proveedor", Cantidades:IDs, PersonaID:cliente.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
+                return true;
+            }
+        }
+
+        //No se encontró la persona
+        return false;
+        
     }
 
     /**
@@ -143,60 +169,40 @@ export class Stock{
      * @param cliente Cliente que está devolviendo.
      * @param ID Mueble que se va a devolver.
      */
-    public DevolverCliente(cliente:Persona, ID:number, fecha:Date):boolean{
-        if(this.GetMueble(ID).Nombre == "dummy") return false;
-        //Sería poner fecha actual aquí.
-        let coste:number = this.GetMueble(ID).Precio;
+    public AñadiendoDeStock(cliente:Persona, IDs:TipoCantidad[], fecha:Date):boolean{
 
-        if(this.AddMueble(ID) == false) return false;
-
-        this.transacciones.push({Persona:"Cliente", Cantidades:ID, PersonaID:cliente.ID, Accion:"Obtener", Fecha:fecha, Importe:coste});
-        return true;
-    }
-
-
-    /**
-     * Proveedor vende un mueble, se añade uno al stock y se guarda la transacción.
-     * @param proveedor Proveedor que está vendiendo.
-     * @param ID Mueble que se va a comprar.
-     */
-    //Comprar varios ID y varios de cada iD
-    public Comprar(proveedor:Persona, ID:number, fecha:Date):boolean{
-        //Sería poner fecha actual aquí.
-        if(this.GetMueble(ID).Nombre == "dummy") return false;
-
-        let coste:number = this.GetMueble(ID).Precio;
-
-        this.AddMueble(ID);
-        this.transacciones.push({Persona:"Cliente", Cantidades:ID, PersonaID:proveedor.ID, Accion:"Obtener", Fecha:fecha, Importe:coste});
-        return true;
-    }
-
-    /**
-     * Realizamos una devolución de un mueble a un proveedor y se guarda la transacción.
-     * @param proveedor Proveedor al que le devolvemos.
-     * @param ID Mueble que se va a devolver.
-     */
-    public DevolverProveedor(proveedor:Persona, IDs:TipoCantidad[], fecha:Date):boolean{
         //Sección de errores
         for(var ID of IDs){
             if(this.GetMueble(ID.MuebleID).Nombre == "dummy") return false;
-            if(ID.Cantidad > this.GetCantidad(ID.MuebleID) || ID.Cantidad <= 0) return false;
+            if(ID.Cantidad <= 0) return false;
         }
 
-        
         //Añadir coste al total y quitarlo del stock
         let coste:number = 0;
         for(var ID of IDs){
             coste += this.GetMueble(ID.MuebleID).Precio;
-            this.QuitarMueble(ID.MuebleID);
+            this.AddMueble(ID.MuebleID);
         }
-        
-        //Pushear la factura
-        this.transacciones.push({Persona:"Proveedor", Cantidades:IDs, PersonaID:proveedor.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
-        return true;
-    }
 
+        //La persona es un cliente, cambiar por BuscarCliente
+        for(var i of this.clientes){
+            if(cliente.ID == i.ID){
+                this.transacciones.push({Persona:"Cliente", Cantidades:IDs, PersonaID:cliente.ID, Accion:"Obtener", Fecha:fecha, Importe:coste});
+                return true;
+            }
+        }
+
+        //La persona es un proveedor, cambiar por BuscarProveedor
+        for(var i of this.proveedores){
+            if(cliente.ID == i.ID){
+                this.transacciones.push({Persona:"Proveedor", Cantidades:IDs, PersonaID:cliente.ID, Accion:"Obtener", Fecha:fecha, Importe:coste});
+                return true;
+            }
+        }
+
+        //No se encontró la persona.
+        return false;
+    }
 
     /**
      * Crea informes varios sobre el stock o las ventas

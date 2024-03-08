@@ -29,6 +29,7 @@ export class Stock{
      * @param ID Mueble que se está buscando
      * @returns Mueble buscado
      */
+    //Otra función para buscar por nombre, tipo y descripción, usar lenguajes regulares ahí, devolver Mueble[]
     private GetMueble(ID:number):Mueble|undefined{
         for(var i of this.muebles){
             if(i.ID == ID){
@@ -179,6 +180,16 @@ export class Stock{
         }
 
         return "Tipo de informe no existente";
+    }
+
+    //Buscar cliente por nombre, contacto o dirección
+    public BuscarCliente():Cliente{
+        return this.clientes[0];
+    }
+
+    //Buscar proveedor por nombre, contacto o dirección
+    public BuscarProveedor():Proveedor{
+        return this.proveedores[0];
     }
 
 }

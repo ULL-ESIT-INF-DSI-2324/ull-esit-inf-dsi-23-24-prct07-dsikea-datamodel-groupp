@@ -30,7 +30,8 @@ export class Stock{
      * @returns Mueble buscado
      */
     //Otra función para buscar por nombre, tipo y descripción, usar lenguajes regulares ahí, devolver Mueble[]
-    private GetMueble(ID:number):Mueble|undefined{
+    //Quiero que sea private pero debe ser publico para hacer test
+    public GetMueble(ID:number):Mueble|undefined{
         for(var i of this.muebles){
             if(i.ID == ID){
                 return i;

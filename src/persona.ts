@@ -1,5 +1,4 @@
 
-
 export class Persona{
     //ID debe ser único
     ID:number = 0;

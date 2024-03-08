@@ -1,6 +1,4 @@
 import { Mueble } from "./mueble";
-import { Cliente } from "./cliente";
-import { Proveedor } from "./proveedor";
 import { Persona } from "./persona";
 
 interface TipoCantidad {
@@ -10,7 +8,7 @@ interface TipoCantidad {
 
 interface Transaccion{
     Persona:"Cliente"|"Proveedor";
-    MuebleIDs:number[];
+    Cantidades:TipoCantidad[];
     PersonaID:number;
     Accion:"Obtener"|"Dar";
     Fecha:Date;
@@ -24,6 +22,16 @@ export class Stock{
     private transacciones:Transaccion[];
     private clientes:Persona[];
     private proveedores:Persona[];
+
+
+    private GetCantidad(ID:number):number{
+        for(var i of this.stock){
+            if(ID == i.MuebleID){
+                return i.Cantidad;
+            }
+        }
+        return -1;
+    }
 
     /**
      * Devuelve un mueble a partir de su ID única
@@ -109,14 +117,24 @@ export class Stock{
      * @param cliente Cliente que está comprando.
      * @param ID Mueble que se va a vender.
      */
-    public Vender(cliente:Cliente, ID:number, fecha:Date):boolean{
-        if(this.GetMueble(ID).Nombre == "dummy") return false;
+    public Vender(cliente:Persona, IDs:TipoCantidad[], fecha:Date):boolean{
 
-        //Sería poner fecha actual aquí.
-        let coste:number = this.GetMueble(ID).Precio;
+        //Sección de errores
+        for(var ID of IDs){
+            if(this.GetMueble(ID.MuebleID).Nombre == "dummy") return false;
+            if(ID.Cantidad > this.GetCantidad(ID.MuebleID) || ID.Cantidad <= 0) return false;
+        }
 
-        this.QuitarMueble(ID);
-        this.transacciones.push({Persona:"Cliente", MuebleID:ID, PersonaID:cliente.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
+        
+        //Añadir coste al total y quitarlo del stock
+        let coste:number = 0;
+        for(var ID of IDs){
+            coste += this.GetMueble(ID.MuebleID).Precio;
+            this.QuitarMueble(ID.MuebleID);
+        }
+        
+        //Pushear la factura
+        this.transacciones.push({Persona:"Cliente", Cantidades:IDs, PersonaID:cliente.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
         return true;
     }
 
@@ -125,14 +143,14 @@ export class Stock{
      * @param cliente Cliente que está devolviendo.
      * @param ID Mueble que se va a devolver.
      */
-    public DevolverCliente(cliente:Cliente, ID:number, fecha:Date):boolean{
+    public DevolverCliente(cliente:Persona, ID:number, fecha:Date):boolean{
         if(this.GetMueble(ID).Nombre == "dummy") return false;
         //Sería poner fecha actual aquí.
         let coste:number = this.GetMueble(ID).Precio;
 
         if(this.AddMueble(ID) == false) return false;
-        
-        this.transacciones.push({Persona:"Cliente", MuebleID:ID, PersonaID:cliente.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
+
+        this.transacciones.push({Persona:"Cliente", Cantidades:ID, PersonaID:cliente.ID, Accion:"Obtener", Fecha:fecha, Importe:coste});
         return true;
     }
 
@@ -143,14 +161,14 @@ export class Stock{
      * @param ID Mueble que se va a comprar.
      */
     //Comprar varios ID y varios de cada iD
-    public Comprar(proveedor:Proveedor, ID:number, fecha:Date):boolean{
+    public Comprar(proveedor:Persona, ID:number, fecha:Date):boolean{
         //Sería poner fecha actual aquí.
         if(this.GetMueble(ID).Nombre == "dummy") return false;
 
         let coste:number = this.GetMueble(ID).Precio;
 
         this.AddMueble(ID);
-        this.transacciones.push({Persona:"Cliente", MuebleID:ID, PersonaID:proveedor.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
+        this.transacciones.push({Persona:"Cliente", Cantidades:ID, PersonaID:proveedor.ID, Accion:"Obtener", Fecha:fecha, Importe:coste});
         return true;
     }
 
@@ -159,15 +177,23 @@ export class Stock{
      * @param proveedor Proveedor al que le devolvemos.
      * @param ID Mueble que se va a devolver.
      */
-    public DevolverProveedor(proveedor:Proveedor, ID:number, fecha:Date):boolean{
-        if(this.GetMueble(ID).Nombre == "dummy") return false;
-        //Sería poner fecha actual aquí.
-        //Fecha como parámetro de la función.
-        
-        let coste:number = this.GetMueble(ID).Precio;
+    public DevolverProveedor(proveedor:Persona, IDs:TipoCantidad[], fecha:Date):boolean{
+        //Sección de errores
+        for(var ID of IDs){
+            if(this.GetMueble(ID.MuebleID).Nombre == "dummy") return false;
+            if(ID.Cantidad > this.GetCantidad(ID.MuebleID) || ID.Cantidad <= 0) return false;
+        }
 
-        this.QuitarMueble(ID);
-        this.transacciones.push({Persona:"Cliente", MuebleID:ID, PersonaID:proveedor.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
+        
+        //Añadir coste al total y quitarlo del stock
+        let coste:number = 0;
+        for(var ID of IDs){
+            coste += this.GetMueble(ID.MuebleID).Precio;
+            this.QuitarMueble(ID.MuebleID);
+        }
+        
+        //Pushear la factura
+        this.transacciones.push({Persona:"Proveedor", Cantidades:IDs, PersonaID:proveedor.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
         return true;
     }
 
@@ -184,25 +210,21 @@ export class Stock{
     public Informes(tipoinforme:number, ID:number = 0):string{
 
         if(tipoinforme == 0){
-            let mas_vendido:TipoCantidad = {MuebleID:0, Cantidad:0};
+            
+        }else if(tipoinforme == 1){
 
-            for(var i of this.stock){
-                if(i.Cantidad >= mas_vendido.Cantidad) mas_vendido = i;
-            }
-
-            return ("Mueble más vendido: " + this.GetMueble(mas_vendido.MuebleID)?.Nombre);
         }
 
         return "Tipo de informe no existente";
     }
 
     //Buscar cliente por nombre, contacto o dirección
-    public BuscarCliente():Cliente{
+    public BuscarCliente():Persona{
         return this.clientes[0];
     }
 
     //Buscar proveedor por nombre, contacto o dirección
-    public BuscarProveedor():Proveedor{
+    public BuscarProveedor():Persona{
         return this.proveedores[0];
     }
 

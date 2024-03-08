@@ -1,6 +1,7 @@
 import { Mueble } from "./mueble";
 import { Cliente } from "./cliente";
 import { Proveedor } from "./proveedor";
+import { Persona } from "./persona";
 
 interface TipoCantidad {
     MuebleID:number;
@@ -9,7 +10,7 @@ interface TipoCantidad {
 
 interface Transaccion{
     Persona:"Cliente"|"Proveedor";
-    MuebleID:number;
+    MuebleIDs:number[];
     PersonaID:number;
     Accion:"Obtener"|"Dar";
     Fecha:Date;
@@ -19,10 +20,10 @@ interface Transaccion{
 export class Stock{
     
     private stock:TipoCantidad[];
-    private muebles:Mueble[]
+    private muebles:Mueble[];
     private transacciones:Transaccion[];
-    private clientes:Cliente[];
-    private proveedores:Proveedor[];
+    private clientes:Persona[];
+    private proveedores:Persona[];
 
     /**
      * Devuelve un mueble a partir de su ID única
@@ -31,58 +32,61 @@ export class Stock{
      */
     //Otra función para buscar por nombre, tipo y descripción, usar lenguajes regulares ahí, devolver Mueble[]
     //Quiero que sea private pero debe ser publico para hacer test
-    public GetMueble(ID:number):Mueble|undefined{
+    
+    public GetMueble(ID:number):Mueble{
         for(var i of this.muebles){
             if(i.ID == ID){
                 return i;
             }
         }
 
-        console.log("Mueble no encontrado");
-        return undefined;
+        //Mueble no encontrado
+        return new Mueble(0, "dummy", "dummy", "nada", [0], 0);
     }
 
     /**
      * Añade una unidad de mueble al stock.
      * @param Mueble Mueble a añadir
      */
-    private AddMueble(ID:number):void{
+    private AddMueble(ID:number):boolean{
         for(var i of this.stock){
             if(i.MuebleID == ID){
                 i.Cantidad++;
-                return;
+                return true;
             }
         }
 
         console.log("Mueble no encontrado");
-        return;
+        return false;
     }   
     
     /**
      * Elimina una unidad de mueble del stock
      * @param ID Mueble a eliminar
      */
-    private QuitarMueble(ID:number):void{
+    private QuitarMueble(ID:number):boolean{
         for(var i of this.stock){
             if(i.MuebleID == ID){
                 if(i.Cantidad > 0){
                     i.Cantidad--;
-                    return;
+                    return true;
                 }else{
                     console.log("No quedan unidades de ese mueble");
-                    return;
+                    return false;
                 }
             }
         }
         console.log("Mueble no encontrado");
-        return;
+        return false;
     }
+
 
     /**
      * Añadir nuevo mueble al stock.
      * @param mueble Mueble a añadir.
      */
-    public CrearMueble(mueble:Mueble):void{
+    //Poner booleano por si pudo crear el mueble o no
+    public CrearMueble(mueble:Mueble):boolean{
         let existe:boolean = false;
 
         for(var i of this.stock){
@@ -94,10 +98,9 @@ export class Stock{
         if(existe == false){
             this.stock.push({MuebleID:mueble.ID, Cantidad:1});
             this.muebles.push(mueble);
-            return;
+            return true;
         }else{
-            console.log("Se intentó añadir mueble ya existente");
-            return;
+            return false;
         }
     }
 
@@ -106,13 +109,15 @@ export class Stock{
      * @param cliente Cliente que está comprando.
      * @param ID Mueble que se va a vender.
      */
-    public Vender(cliente:Cliente, ID:number):void{
+    public Vender(cliente:Cliente, ID:number, fecha:Date):boolean{
+        if(this.GetMueble(ID).Nombre == "dummy") return false;
+
         //Sería poner fecha actual aquí.
-        let fecha:Date = new Date(21-1-2024);
         let coste:number = this.GetMueble(ID).Precio;
 
         this.QuitarMueble(ID);
         this.transacciones.push({Persona:"Cliente", MuebleID:ID, PersonaID:cliente.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
+        return true;
     }
 
     /**
@@ -120,13 +125,15 @@ export class Stock{
      * @param cliente Cliente que está devolviendo.
      * @param ID Mueble que se va a devolver.
      */
-    public DevolverCliente(cliente:Cliente, ID:number):void{
+    public DevolverCliente(cliente:Cliente, ID:number, fecha:Date):boolean{
+        if(this.GetMueble(ID).Nombre == "dummy") return false;
         //Sería poner fecha actual aquí.
-        let fecha:Date = new Date(21-1-2024);
         let coste:number = this.GetMueble(ID).Precio;
 
-        this.AddMueble(ID);
+        if(this.AddMueble(ID) == false) return false;
+        
         this.transacciones.push({Persona:"Cliente", MuebleID:ID, PersonaID:cliente.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
+        return true;
     }
 
 
@@ -135,13 +142,16 @@ export class Stock{
      * @param proveedor Proveedor que está vendiendo.
      * @param ID Mueble que se va a comprar.
      */
-    public Comprar(proveedor:Proveedor, ID:number):void{
+    //Comprar varios ID y varios de cada iD
+    public Comprar(proveedor:Proveedor, ID:number, fecha:Date):boolean{
         //Sería poner fecha actual aquí.
-        let fecha:Date = new Date(21-1-2024);
+        if(this.GetMueble(ID).Nombre == "dummy") return false;
+
         let coste:number = this.GetMueble(ID).Precio;
 
         this.AddMueble(ID);
         this.transacciones.push({Persona:"Cliente", MuebleID:ID, PersonaID:proveedor.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
+        return true;
     }
 
     /**
@@ -149,13 +159,16 @@ export class Stock{
      * @param proveedor Proveedor al que le devolvemos.
      * @param ID Mueble que se va a devolver.
      */
-    public DevolverProveedor(proveedor:Proveedor, ID:number):void{
+    public DevolverProveedor(proveedor:Proveedor, ID:number, fecha:Date):boolean{
+        if(this.GetMueble(ID).Nombre == "dummy") return false;
         //Sería poner fecha actual aquí.
-        let fecha:Date = new Date(21-1-2024);
+        //Fecha como parámetro de la función.
+        
         let coste:number = this.GetMueble(ID).Precio;
 
         this.QuitarMueble(ID);
         this.transacciones.push({Persona:"Cliente", MuebleID:ID, PersonaID:proveedor.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
+        return true;
     }
 
 

@@ -1,5 +1,7 @@
-import { Mueble } from "./mueble";
-import { Persona } from "./persona";
+import { Mueble } from "./mueble.js";
+import { Persona } from "./persona.js";
+import { TipoCantidad } from "./tipoCantidad.js";
+import { Transaccion } from "./transacccion.js";
 
 /**
  * Cosas por hacer
@@ -11,19 +13,7 @@ import { Persona } from "./persona";
  * Documentación y Sonarcloud
  */
 
-interface TipoCantidad {
-    MuebleID:number;
-    Cantidad:number;
-}
 
-interface Transaccion{
-    Persona:"Cliente"|"Proveedor";
-    Cantidades:TipoCantidad[];
-    PersonaID:number;
-    Accion:"Obtener"|"Dar";
-    Fecha:Date;
-    Importe:number;
-}
 
 export class Stock{
     

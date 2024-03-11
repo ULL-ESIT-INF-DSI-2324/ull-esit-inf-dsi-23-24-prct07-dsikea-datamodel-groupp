@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "<sup>José Javier Ramos Carballo, [alu0101313313@ull.edu.es](https://github.com/alu0101313313)",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "doc": "typedoc",
     "test": "mocha",
-    "coverage": "nyc npm test && nyc report --reporter=lcov"
+    "coverage": "c8 npm test && c8 report --reporter=lcov"
   },
   "keywords": [],
   "author": "",
@@ -19,17 +20,17 @@
     "@types/node": "^20.11.24",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
+    "c8": "^9.1.0",
     "chai": "^4.4.1",
     "coveralls": "^3.1.1",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
+    "inquirer": "^7.3.3",
+    "lowdb": "^1.0.0",
     "mocha": "^10.3.0",
-    "nyc": "^15.1.0",
     "prettier": "^3.2.5",
     "ts-node": "^10.9.2",
     "typedoc": "^0.25.8",
-    "typescript": "^5.3.3",
-    "inquirer": "^7.3.3",
-    "lowdb": "^1.0.0"
+    "typescript": "^5.3.3"
   }
 }

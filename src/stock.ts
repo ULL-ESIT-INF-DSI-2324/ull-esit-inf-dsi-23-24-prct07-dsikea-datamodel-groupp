@@ -144,6 +144,7 @@ export class Stock{
         }
         
         //La persona es un cliente, cambiar por BuscarCliente
+        //Poner que pierdo varios y cobrar varios 
         for(var i of this.clientes){
             if(cliente.ID == i.ID){
                 this.transacciones.push({Persona:"Cliente", Cantidades:IDs, PersonaID:cliente.ID, Accion:"Dar", Fecha:fecha, Importe:coste});

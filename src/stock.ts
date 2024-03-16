@@ -13,8 +13,14 @@ import { Transaccion } from "./transacccion.js";
  * Documentación y Sonarcloud
  */
 
-
-
+/**
+ * @class Stock es la clase que gestiona el stock que tenemos en nuestro almacen
+ * @param stock señala el conjunto de muebles que poseemos
+ * @param muebles define cada mueble, sus propiedades, cantidades, etc...
+ * @param transaccciones genera las transacciones sobre nuestro stock en caso de compra y/o venta
+ * @param cliente señala un tipo de persona que puede comprar y/o vender productos de manera anomima
+ * @param proveedores señala un tipo de persona que nos puede comprar y/o vender productor a traves de una empresa 
+ */
 export class Stock{
     
     private stock:TipoCantidad[];
@@ -23,7 +29,11 @@ export class Stock{
     private clientes:Persona[];
     private proveedores:Persona[];
 
-
+		/**
+		 * funcion que devuelve la cantidad de muebles 
+		 * @param ID el identificador del mueble
+		 * @returns la cantidad del mueble
+		 */
     private GetCantidad(ID:number):number{
         for(var i of this.stock){
             if(ID == i.MuebleID){
@@ -52,10 +62,11 @@ export class Stock{
         return new Mueble(0, "dummy", "dummy", "nada", [0], 0);
     }
 
-    /**
-     * Añade una unidad de mueble al stock.
-     * @param Mueble Mueble a añadir
-     */
+		/**
+		 * Añade una unidad de mueble al stock
+		 * @param ID el identificador del mueble a añadir
+		 * @returns true si el mueble ha sido añadido correctamente, false en otro caso
+		 */
     private AddMueble(ID:number):boolean{
         for(var i of this.stock){
             if(i.MuebleID == ID){
@@ -68,10 +79,11 @@ export class Stock{
         return false;
     }   
     
-    /**
-     * Elimina una unidad de mueble del stock
-     * @param ID Mueble a eliminar
-     */
+		/**
+		 * Eleminia una uidad de mueble del stock
+		 * @param ID el identificador del mueble a eliminar
+		 * @returns true si se ha podido eliminar correctamente, false en otro caso
+		 */
     private QuitarMueble(ID:number):boolean{
         for(var i of this.stock){
             if(i.MuebleID == ID){
@@ -94,6 +106,12 @@ export class Stock{
      * @param mueble Mueble a añadir.
      */
     //Poner booleano por si pudo crear el mueble o no
+
+		/**
+		 * Funcion que genera un nuevo tipo de mueble y añade una unidad al stock
+		 * @param mueble señala el nuevo mueble a crear 
+		 * @returns true si la creacion del mueble ha sido correcta, falso en otro caso
+		 */
     public CrearMueble(mueble:Mueble):boolean{
         let existe:boolean = false;
 
@@ -113,10 +131,12 @@ export class Stock{
     }
 
     /**
-     * Cliente compra un mueble, se elimina uno del stock y se guarda la transacción.
-     * @param cliente Cliente que está comprando.
-     * @param ID Mueble que se va a vender.
-     */
+		 * Una función que se encarga de retirar una cantidad de muebles de stock
+		 * @param cliente señala a la persona a la que procedemos venderle nuestros productos
+		 * @param IDs el identificador de los muebles a vender
+		 * @param fecha la fecha de la transacción
+		 * @returns true si la retirada ha concluido correctamente, false en otro caso
+		 */
     public RemoverDeStock(cliente:Persona, IDs:TipoCantidad[], fecha:Date):boolean{
 
         //Sección de errores
@@ -156,10 +176,12 @@ export class Stock{
     }
 
     /**
-     * Cliente realiza una devolución de un mueble y se guarda la transacción.
-     * @param cliente Cliente que está devolviendo.
-     * @param ID Mueble que se va a devolver.
-     */
+		 * Una función que se encarga de añadir una cantidad de muebles al stock
+		 * @param cliente señala a la persona a la que procedemos comprarle muebles
+		 * @param IDs el identificador de los muebles a comprar
+		 * @param fecha la fecha de la transacción
+		 * @returns true si la adquisición ha concluido correctamente, false en otro caso
+		 */
     public AñadiendoDeStock(cliente:Persona, IDs:TipoCantidad[], fecha:Date):boolean{
 
         //Sección de errores

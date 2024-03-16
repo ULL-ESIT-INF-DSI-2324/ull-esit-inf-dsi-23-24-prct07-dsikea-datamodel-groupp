@@ -10,6 +10,12 @@ Daniel Marhuenda Guillén, [alu0101487731@ull.edu.es](https://github.com/alu0101
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ULL-ESIT-INF-DSI-2324_ull-esit-inf-dsi-23-24-prct07-dsikea-datamodel-groupp&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ULL-ESIT-INF-DSI-2324_ull-esit-inf-dsi-23-24-prct07-dsikea-datamodel-groupp)
 
 ## Introducción
+
+En esta práctica nos encargamos de gestionar una tienda de muebles, donde gestionamos las adquisiciones y/o ventas respecto a nuestros clientes y proveedores.
+
+## Implementación Conceptual
+
+
 En esta tarea hemos tenido que hacer el gestor de una tienda de muebles, creando las clases mueble, cliente, proveedor y stock:
 
 Mueble tiene su ID único, un nombre común, una descripción, el material del que está hecho, sus dimenciones y su precio. Nada interesante que comentar en este respecto.
@@ -19,14 +25,7 @@ Cliente y Proveedor tienen su ID único, su nombre, su contacto y su dirección,
 En la clase Stock está todo el trabajo, esta clase tiene tres listas: el stock, dónde se guarda cuantas unidades hay de cada mueble por su ID para seguridad(No nos parecía buena idea que en devolución el supuesto cliente pudiera crear un nuevo mueble propio), muebles, donde se guardan los propios objetos de tipo mueble, y transacciones, donde se guardan las transacciones realizadas.
 
 
-
-## Tareas Previas
-
-- [] Tarea 1
-- [] Tarea 2
-
-
-## Ejercicio
+## Implementación sobre el código
 
 Las clases Mueble, Cliente y Proveedor no tienen funciones propias más que el constructor ya que no se trabajará modificándolas, sólo guardándolas.
 
@@ -49,6 +48,6 @@ Esto último se podría hacer con menos código usando una clase padre Persona c
 
 Para este ultimo punto, he recopilado algunas de las paginas que me han sido utiles para los ejercicos de la _práctica_:
 
-1. **ref1** []()
+1. **Aprendizaje sobre _inquirer_ y _lowdb_** [https://learning-oreilly-com.accedys2.bbtk.ull.es/library/view/essential-typescript-4/9781484270110/html/481342_2_En_1_Chapter.xhtml](https://learning-oreilly-com.accedys2.bbtk.ull.es/library/view/essential-typescript-4/9781484270110/html/481342_2_En_1_Chapter.xhtml)
 2. **ref2** []()
 3. **ref3** []()

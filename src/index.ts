@@ -35,15 +35,23 @@ function displayTodoList(): void {
 }
 */
 
-enum Commands {
+enum comandosPrincipales {
   Interactuar_clientes = "Interacturar con un cliente",
+  Interactuar_proveedores = "Interacturar con un proveedor",
+  Informes = "Consultar informes",
+  Busquedas = "Realice busquedas sobre nuestro stock",
+  Quit = "Quit"
+}
+
+enum Commands {
+  
   nuevo_cliente = "Cliente nuevo",
       // crear_cliente
   cliente_existente = "Cliente registrado",
       // buscar_cliente
         // vender mueble
         // devolver mueble
-  Interactuar_proveedores = "Interacturar con un proveedor",
+  
   nuevo_proveedor = "Proveedor nuevo",
     //crear proveedor
   proveedor_existente = "Proveedor registrado",
@@ -51,13 +59,13 @@ enum Commands {
       // Comprar mueble
       // Añadir mueble existente
       // Añadir nuevo mueble 
-  Informes = "Consultar informes",
+  
   Categoria_mueble = "Busqueda por una categoria de mueble concreta",
   Concreto_mueble = "Busqueda de un mueble en concreto", 
   Mueble_mas_vendidos = "Busqueda por los muebles mas vendidos",
   Ultimas_transacciones = "Busquedas por venta a clientes, compra a proveedores, fecha",
   Historico_persona = "Busquedas por persona concreta",
-  Busquedas = "Realice busquedas sobre nuestro stock",
+  
   Muebles = "Filtra sobre muebles", //(orden alfabetico y precio, ascendente o descendente)
       //nombre
       //tipo
@@ -179,19 +187,19 @@ function promptUser(): void {
     type: "list",
     name: "command",
     message: "Seleccione Accion: ",
-    choices: Object.values(Commands), 
+    choices: Object.values(comandosPrincipales), 
   }).then(answers => {
     switch(answers["command"]){
-      case Commands.Interactuar_clientes:
+      case comandosPrincipales.Interactuar_clientes:
         promptInteracturarClientes();
         break;
-      case Commands.Interactuar_proveedores:
+      case comandosPrincipales.Interactuar_proveedores:
         promptInteracturarProveedores();
         break;
-      case Commands.Informes:
+      case comandosPrincipales.Informes:
         promptInformes();
         break;
-      case Commands.Busquedas:
+      case comandosPrincipales.Busquedas:
         promptBusquedas();
         break;
     }

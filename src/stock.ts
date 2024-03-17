@@ -59,7 +59,7 @@ export class Stock{
         }
 
         //Mueble no encontrado
-        return new Mueble(0, "dummy", "dummy", "nada", [0], 0);
+        return new Mueble(0, "dummy", "dummy", ["nada"], [0], 0);
     }
 
 		/**
@@ -141,14 +141,14 @@ export class Stock{
 
         //Sección de errores
         for(var ID of IDs){
-            if(this.GetMueble(ID.MuebleID).Nombre == "dummy") return false;
+            if(this.GetMueble(ID.MuebleID).nombre == "dummy") return false;
             if(ID.Cantidad > this.GetCantidad(ID.MuebleID) || ID.Cantidad <= 0) return false;
         }
         
         //Añadir coste al total y quitarlo del stock
         let coste:number = 0;
         for(var ID of IDs){
-            coste += this.GetMueble(ID.MuebleID).Precio;
+            coste += this.GetMueble(ID.MuebleID).precio;
             this.QuitarMueble(ID.MuebleID);
         }
         
@@ -185,14 +185,14 @@ export class Stock{
 
         //Sección de errores
         for(var ID of IDs){
-            if(this.GetMueble(ID.MuebleID).Nombre == "dummy") return false;
+            if(this.GetMueble(ID.MuebleID).nombre == "dummy") return false;
             if(ID.Cantidad <= 0) return false;
         }
 
         //Añadir coste al total y quitarlo del stock
         let coste:number = 0;
         for(var ID of IDs){
-            coste += this.GetMueble(ID.MuebleID).Precio;
+            coste += this.GetMueble(ID.MuebleID).precio;
             this.AddMueble(ID.MuebleID);
         }
 
@@ -215,6 +215,44 @@ export class Stock{
         //No se encontró la persona.
         return false;
     }
+    //Ordenacion de menor a mayor
+    public Ordenacion(lista:TipoCantidad[], criterio:"Precio"|"Nombre"):TipoCantidad[]{
+        //[elements[0], elements[3]] = [elements[3], elements[0]];
+
+        if(criterio == "Precio"){
+        let MenorElemento = {Pos:0, Criterio:0};
+
+        for(let i = 0; i < lista.length-1; i++){
+            MenorElemento = {Pos:i, Criterio:lista[i].Cantidad};
+
+            for(let j = i+1; j < lista.length; j++){
+                if(lista[j].Cantidad < MenorElemento.Criterio){
+                    MenorElemento = {Pos:j, Criterio:lista[j].Cantidad};
+                }
+            }
+            [lista[i], lista[MenorElemento.Pos]] = [lista[MenorElemento.Pos], lista[i]];
+        }
+    }
+        /*
+        else if(criterio == "Nombre"){
+            let MenorElemento = {Pos:0, Criterio:""};
+    
+            for(let i = 0; i < lista.length-1; i++){
+                MenorElemento = {Pos:i, Criterio:lista[i].Cantidad};
+    
+                for(let j = i+1; j < lista.length; j++){
+                    if(lista[j].Cantidad < MenorElemento.Criterio){
+                        MenorElemento = {Pos:j, Criterio:lista[j].Cantidad};
+                    }
+                }
+                [lista[i], lista[MenorElemento.Pos]] = [lista[MenorElemento.Pos], lista[i]];
+            }
+            }
+            */
+
+        return lista;
+    }
+
 
     /**
      * Crea informes varios sobre el stock o las ventas
@@ -225,11 +263,36 @@ export class Stock{
      * @param ID ID en caso de mirar mueble o persona específica
      * @returns 
      */
-    public Informes(tipoinforme:number, ID:number = 0):string{
+    public Informes(tipoinforme:string, parametros:any[]){
 
-        if(tipoinforme == 0){
-            
-        }else if(tipoinforme == 1){
+        if(tipoinforme == "Más vendido"){
+
+            //Almacenar cuánto se ha vendido de cada mueble
+            let Cantidades:TipoCantidad[] = [];
+            let encontrado:boolean = false;
+
+            for(var transacccion of this.transacciones){
+                for(var venta of transacccion.Cantidades){
+
+                    encontrado = false;
+                    for(let i = 0; i < Cantidades.length; i++){
+                        if(venta.MuebleID == Cantidades[i].MuebleID){
+                            Cantidades[i].Cantidad += venta.Cantidad;
+                            encontrado = true;
+                        }
+                    }
+                    if(encontrado == false){
+                        Cantidades.push(venta);
+                    }
+
+                }
+            }
+
+            //Buscar cuál fue el más vendido
+            Cantidades = this.Ordenacion(Cantidades, "Precio");
+            console.log(Cantidades);
+
+        }else if(tipoinforme == "1"){
 
         }
 

@@ -4,7 +4,7 @@ import { Stock } from '../src/stock';
 import { Mueble } from '../src/mueble';
 
 let stock = new Stock([], );
-let mueble:Mueble = new Mueble(1, "silla", "Silla de madera", "madera", [2, 2, 10], 50);
+let mueble:Mueble = new Mueble(1, "silla", "Silla de madera", ["madera"], [2, 2, 10], 50, 1);
 
 stock.CrearMueble(mueble);
 

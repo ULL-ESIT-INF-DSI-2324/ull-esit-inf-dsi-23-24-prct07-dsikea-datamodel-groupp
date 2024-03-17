@@ -53,6 +53,10 @@ export class Stock{
         return -1;
     }
 
+    public GetMueble(id:number){
+        return this.stock.get(id) as Mueble;
+    }
+
     public GetClienteID():number{
         let result:number = 0;
         while(true){

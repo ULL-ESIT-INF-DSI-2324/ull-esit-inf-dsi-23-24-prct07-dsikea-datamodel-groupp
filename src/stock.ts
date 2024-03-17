@@ -13,9 +13,6 @@ import { TipoCantidad } from "./tipoCantidad.js";
  * Documentación y Sonarcloud
  */
 
-interface TipoCantidad{
-    
-}
 
 /**
  * @class Stock es la clase que gestiona el stock que tenemos en nuestro almacen
@@ -147,15 +144,14 @@ export class Stock{
 
         //Sección de errores
         for(var ID of IDs){
-            if(this.GetMueble(ID.Mueble).nombre == "dummy") return false;
-            if(ID.Cantidad > this.GetCantidad(ID.Mueble) || ID.Cantidad <= 0) return false;
+            if(ID.cantidad > this.GetCantidad(ID.mueble) || ID.cantidad <= 0) return false;
         }
         
         //Añadir coste al total y quitarlo del stock
         let coste:number = 0;
         for(var ID of IDs){
-            coste += this.GetMueble(ID.Mueble).precio;
-            this.QuitarMueble(ID.Mueble, ID.Cantidad);
+            coste += ID.mueble.precio;
+            this.QuitarMueble(ID.mueble.ID, ID.cantidad);
         }
         
         //La persona es un cliente, cambiar por BuscarCliente
@@ -191,15 +187,14 @@ export class Stock{
 
         //Sección de errores
         for(var ID of IDs){
-            if(this.GetMueble(ID.Mueble).nombre == "dummy") return false;
-            if(ID.Cantidad <= 0) return false;
+            if(ID.cantidad <= 0) return false;
         }
 
         //Añadir coste al total y quitarlo del stock
         let coste:number = 0;
         for(var ID of IDs){
-            coste += this.GetMueble(ID.Mueble).precio;
-            this.AddMueble(ID.Mueble);
+            coste += ID.mueble.precio;
+            this.AddMueble(ID.mueble.ID, ID.cantidad);
         }
 
         //La persona es un cliente, cambiar por BuscarCliente
@@ -229,11 +224,11 @@ export class Stock{
         let MenorElemento = {Pos:0, Criterio:0};
 
         for(let i = 0; i < lista.length-1; i++){
-            MenorElemento = {Pos:i, Criterio:lista[i].Cantidad};
+            MenorElemento = {Pos:i, Criterio:lista[i].cantidad};
 
             for(let j = i+1; j < lista.length; j++){
-                if(lista[j].Cantidad < MenorElemento.Criterio){
-                    MenorElemento = {Pos:j, Criterio:lista[j].Cantidad};
+                if(lista[j].cantidad < MenorElemento.Criterio){
+                    MenorElemento = {Pos:j, Criterio:lista[j].cantidad};
                 }
             }
             [lista[i], lista[MenorElemento.Pos]] = [lista[MenorElemento.Pos], lista[i]];
@@ -282,8 +277,8 @@ export class Stock{
 
                     encontrado = false;
                     for(let i = 0; i < Cantidades.length; i++){
-                        if(venta.Mueble == Cantidades[i].Mueble){
-                            Cantidades[i].Cantidad += venta.Cantidad;
+                        if(venta.mueble == Cantidades[i].mueble){
+                            Cantidades[i].cantidad += venta.cantidad;
                             encontrado = true;
                         }
                     }
@@ -309,19 +304,19 @@ export class Stock{
     public BuscarCliente(criterio:"Nombre"|"Contacto"|"Direccion"|"ID", filtro:string|number):Persona{
         if(criterio == "Nombre"){
         for(var i of this.clientes){
-            if(i.Nombre == filtro){
+            if(i.nombre == filtro){
                 return i;
             }
         }
         }else if(criterio == "Contacto"){
             for(var i of this.clientes){
-                if(i.Contacto == filtro){
+                if(i.contacto == filtro){
                     return i;
                 }
             }
         }else if(criterio == "Direccion"){
             for(var i of this.clientes){
-                if(i.Direccion == filtro){
+                if(i.direccion == filtro){
                     return i;
                 }
             }
@@ -339,19 +334,19 @@ export class Stock{
     public BuscarProveedor(criterio:"Nombre"|"Contacto"|"Direccion"|"ID", filtro:string|number):Persona{
         if(criterio == "Nombre"){
             for(var i of this.proveedores){
-                if(i.Nombre == filtro){
+                if(i.nombre == filtro){
                     return i;
                 }
             }
             }else if(criterio == "Contacto"){
                 for(var i of this.proveedores){
-                    if(i.Contacto == filtro){
+                    if(i.contacto == filtro){
                         return i;
                     }
                 }
             }else if(criterio == "Direccion"){
                 for(var i of this.proveedores){
-                    if(i.Direccion == filtro){
+                    if(i.direccion == filtro){
                         return i;
                     }
                 }

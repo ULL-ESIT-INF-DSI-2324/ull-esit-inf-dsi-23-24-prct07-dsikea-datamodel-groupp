@@ -52,7 +52,28 @@ export class Stock{
     }
 
     public GetClienteID():number{
-        return this.clientes[this.clientes.length-1].ID;
+        let result:number = 0;
+        while(true){
+            result++;
+            if(!this.clientes.has(result)) break;
+        }
+        return result;
+    }
+    public GetProveedorID():number{
+        let result:number = 0;
+        while(true){
+            result++;
+            if(!this.proveedores.has(result)) break;
+        }
+        return result;
+    }
+    public GetTransaccionID():number{
+        let result:number = 0;
+        while(true){
+            result++;
+            if(!this.transacciones.has(result)) break;
+        }
+        return result;
     }
 
     crearCliente(){
@@ -161,7 +182,7 @@ export class Stock{
 		 * @param fecha la fecha de la transacción
 		 * @returns true si la retirada ha concluido correctamente, false en otro caso
 		 */
-    public RemoverDeStock(cliente:Persona, IDs:TipoCantidad[], fecha:Date): boolean{
+    public RemoverDeStock(persona:Persona, tipopersona:"Cliente"|"Proveedor", IDs:TipoCantidad[], fecha:Date): boolean{
 
         //Sección de errores
         for(var ID of IDs){
@@ -175,25 +196,14 @@ export class Stock{
             this.QuitarMueble(ID.mueble.ID, ID.cantidad);
         }
         
-        //La persona es un cliente, cambiar por BuscarCliente
-        //Poner que pierdo varios y cobrar varios 
-        for(var i of this.clientes){
-            if(cliente.ID == i.ID){
-                this.transacciones.push({Persona:"Cliente", Cantidades:IDs, PersonaID:cliente.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
-                return true;
-            }
+        let id:number = 0;
+        if(tipopersona == "Cliente"){
+            id = this.GetClienteID();
+        }else{
+            id = this.GetProveedorID();
         }
-
-        //La persona es un proveedor, cambiar por BuscarProveedor
-        for(var i of this.proveedores){
-            if(cliente.ID == i.ID){
-                this.transacciones.push({Persona:"Proveedor", Cantidades:IDs, PersonaID:cliente.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
-                return true;
-            }
-        }
-
-        //No se encontró la persona
-        return false;
+        this.transacciones.set(id, {ID:id, Persona:tipopersona, Cantidades:IDs, PersonaID:persona.ID, Accion:"Dar", Fecha:fecha, Importe:coste});
+        return true;
         
     }
 
@@ -204,7 +214,7 @@ export class Stock{
 		 * @param fecha la fecha de la transacción
 		 * @returns true si la adquisición ha concluido correctamente, false en otro caso
 		 */
-    public AñadiendoDeStock(cliente:Persona, IDs:TipoCantidad[], fecha:Date):boolean{
+    public AñadiendoDeStock(persona:Persona, tipopersona:"Cliente"|"Proveedor", IDs:TipoCantidad[], fecha:Date):boolean{
 
         //Sección de errores
         for(var ID of IDs){
@@ -218,24 +228,14 @@ export class Stock{
             this.AddMueble(ID.mueble.ID, ID.cantidad);
         }
 
-        //La persona es un cliente, cambiar por BuscarCliente
-        for(var i of this.clientes){
-            if(cliente.ID == i.ID){
-                this.transacciones.push({Persona:"Cliente", Cantidades:IDs, PersonaID:cliente.ID, Accion:"Obtener", Fecha:fecha, Importe:coste});
-                return true;
-            }
+        let id:number = 0;
+        if(tipopersona == "Cliente"){
+            id = this.GetClienteID();
+        }else{
+            id = this.GetProveedorID();
         }
-
-        //La persona es un proveedor, cambiar por BuscarProveedor
-        for(var i of this.proveedores){
-            if(cliente.ID == i.ID){
-                this.transacciones.push({Persona:"Proveedor", Cantidades:IDs, PersonaID:cliente.ID, Accion:"Obtener", Fecha:fecha, Importe:coste});
-                return true;
-            }
-        }
-
-        //No se encontró la persona.
-        return false;
+        this.transacciones.set(id, {ID:id, Persona:tipopersona, Cantidades:IDs, PersonaID:persona.ID, Accion:"Obtener", Fecha:fecha, Importe:coste});
+        return true;
     }
     //Ordenacion de menor a mayor
     public Ordenacion(lista:TipoCantidad[], criterio:"Precio"|"Nombre"):TipoCantidad[]{
@@ -294,7 +294,7 @@ export class Stock{
             let encontrado:boolean = false;
 
             for(var transacccion of this.transacciones){
-                for(var venta of transacccion.Cantidades){
+                for(var venta of transacccion[1].Cantidades){
 
                     encontrado = false;
                     for(let i = 0; i < Cantidades.length; i++){
@@ -325,60 +325,60 @@ export class Stock{
     public BuscarCliente(criterio:"Nombre"|"Contacto"|"Direccion"|"ID", filtro:string|number):Persona{
         if(criterio == "Nombre"){
         for(var i of this.clientes){
-            if(i.nombre == filtro){
-                return i;
+            if(i[1].nombre == filtro){
+                return i[1];
             }
         }
         }else if(criterio == "Contacto"){
             for(var i of this.clientes){
-                if(i.contacto == filtro){
-                    return i;
+                if(i[1].contacto == filtro){
+                    return i[1];
                 }
             }
         }else if(criterio == "Direccion"){
             for(var i of this.clientes){
-                if(i.direccion == filtro){
-                    return i;
+                if(i[1].direccion == filtro){
+                    return i[1];
                 }
             }
         }else if(criterio == "ID"){
             for(var i of this.clientes){
-                if(i.ID == filtro){
-                    return i;
+                if(i[1].ID == filtro){
+                    return i[1];
                 }
             }
         }   
-        return this.clientes[0];
+        return this.clientes.get(1) as Persona;
     }
 
     //Buscar proveedor por nombre, contacto o dirección
     public BuscarProveedor(criterio:"Nombre"|"Contacto"|"Direccion"|"ID", filtro:string|number):Persona{
         if(criterio == "Nombre"){
             for(var i of this.proveedores){
-                if(i.nombre == filtro){
-                    return i;
+                if(i[1].nombre == filtro){
+                    return i[1];
                 }
             }
             }else if(criterio == "Contacto"){
                 for(var i of this.proveedores){
-                    if(i.contacto == filtro){
-                        return i;
+                    if(i[1].contacto == filtro){
+                        return i[1];
                     }
                 }
             }else if(criterio == "Direccion"){
                 for(var i of this.proveedores){
-                    if(i.direccion == filtro){
-                        return i;
+                    if(i[1].direccion == filtro){
+                        return i[1];
                     }
                 }
             }else if(criterio == "ID"){
                 for(var i of this.proveedores){
-                    if(i.ID == filtro){
-                        return i;
+                    if(i[1].ID == filtro){
+                        return i[1];
                     }
                 }
             }   
-            return this.proveedores[0];
+            return this.proveedores.get(1) as Persona;
     }
 
 }

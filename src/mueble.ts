@@ -9,20 +9,8 @@
  * @param Precio determina el precio por unidad de cada mueble
  */
 export class Mueble {
-	
-	ID: number = 0;
-	Nombre: string = "";
-	Descripcion: string = "";
-	Material: string = "";
-	Dimensiones: number[] = [];
-	Precio: number = 0;
 
-	constructor(ID: number, nombre: string, descripcion: string, material: string, dimensiones: number[], precio: number) {
-		this.ID = ID;
-		this.Nombre = nombre;
-		this.Descripcion = descripcion;
-		this.Material = material;
-		this.Dimensiones = dimensiones;
-		this.Precio = precio;
+	constructor(public ID: number, public nombre: string, public descripcion: string, 
+		public materiales: string[], public dimensiones: number[], public precio: number) {
 	}
 }

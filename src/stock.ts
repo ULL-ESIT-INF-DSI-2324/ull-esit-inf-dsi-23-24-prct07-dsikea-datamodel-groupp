@@ -137,14 +137,13 @@ export class Stock{
 		 * @param fecha la fecha de la transacción
 		 * @returns true si la retirada ha concluido correctamente, false en otro caso
 		 */
-    public RemoverDeStock(cliente:Persona, IDs:TipoCantidad[], fecha:Date):boolean{
+    public RemoverDeStock(cliente:Persona, IDs:TipoCantidad[], fecha:Date): boolean{
 
         //Sección de errores
         for(var ID of IDs){
             if(this.GetMueble(ID.MuebleID).Nombre == "dummy") return false;
             if(ID.Cantidad > this.GetCantidad(ID.MuebleID) || ID.Cantidad <= 0) return false;
         }
-
         
         //Añadir coste al total y quitarlo del stock
         let coste:number = 0;

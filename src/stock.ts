@@ -2,6 +2,8 @@ import { Mueble } from "./mueble.js";
 import { Persona } from "./persona.js";
 import { Transaccion } from "./transacccion.js";
 import { TipoCantidad } from "./tipoCantidad.js";
+import inquirer from "inquirer";
+
 
 /**
  * Cosas por hacer
@@ -46,6 +48,23 @@ export class Stock{
         
         return -1;
     }
+
+    public GetClienteID():number{
+        return this.clientes[this.clientes.length-1].ID;
+    }
+
+    crearCliente(){
+        console.clear();
+        inquirer.prompt(
+          { type: "input", 
+            name: "command", 
+            message: "Nuevo cliente o cliente existente:", 
+            })
+        .then(answers => {
+          
+        })
+      }
+
 
     /**
      * Devuelve un mueble a partir de su ID única

@@ -1,3 +1,5 @@
+
+
 /**
  * @class Persona concreta las entidades externas con las que realizamos las compras y ventas de muebles
  * @param ID es el identificador unico de cada cliente / proveedor
@@ -8,4 +10,7 @@
 export class Persona {
 
   constructor(public ID: number, public nombre: string, public contacto: string, public direccion: string) {}
+
+
 }
+

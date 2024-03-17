@@ -1,0 +1,296 @@
+{
+  "muebles": [
+    {
+      "ID": 1,
+      "nombre": "garugabksv",
+      "descripcion": "Mesa pequeña negra",
+      "materiales": [
+        "madera"
+      ],
+      "dimensiones": [
+        80,
+        160,
+        50
+      ],
+      "precio": 38.99
+    },
+    {
+      "ID": 2,
+      "nombre": "ksvis",
+      "descripcion": "Comoda negra tamaño estandar",
+      "materiales": [
+        "madera",
+        "acero"
+      ],
+      "dimensiones": [
+        30,
+        62,
+        70
+      ],
+      "precio": 54.99
+    },
+    {
+      "ID": 3,
+      "nombre": "loqufdca",
+      "descripcion": "Sofa-cama grande con forma de L",
+      "materiales": [
+        "cuero",
+        "espuma de poliuretano"
+      ],
+      "dimensiones": [
+        220,
+        325,
+        91
+      ],
+      "precio": 644.99
+    },
+    {
+      "ID": 4,
+      "nombre": "ewsqv",
+      "descripcion": "Silla de oficina con tapiz blanco",
+      "materiales": [
+        "acero",
+        "piel natural"
+      ],
+      "dimensiones": [
+        66,
+        60,
+        108
+      ],
+      "precio": 67.99
+    },
+    {
+      "ID": 5,
+      "nombre": "apoiuwe",
+      "descripcion": "Mesa de noche de madera clara",
+      "materiales": [
+        "madera"
+      ],
+      "dimensiones": [
+        38,
+        42,
+        56
+      ],
+      "precio": 74.99
+    },
+    {
+      "ID": 6,
+      "nombre": "piwuu",
+      "descripcion": "Cuadro portaretrato de pequeñas dimesiones",
+      "materiales": [
+        "pvc",
+        "cristal"
+      ],
+      "dimensiones": [
+        2.4,
+        10,
+        15
+      ],
+      "precio": 14.99
+    },
+    {
+      "ID": 7,
+      "nombre": "vuqloa",
+      "descripcion": "Espejo de tamaño cuerpo completo",
+      "materiales": [
+        "acero",
+        "cristal"
+      ],
+      "dimensiones": [
+        68,
+        5.2,
+        180
+      ],
+      "precio": 244.99
+    },
+    {
+      "ID": 8,
+      "nombre": "swyia",
+      "descripcion": "Cama individual tamaño estandar",
+      "materiales": [
+        "polialgodon",
+        "acero",
+        "madera"
+      ],
+      "dimensiones": [
+        80,
+        53,
+        190
+      ],
+      "precio": 238.99
+    },
+    {
+      "ID": 9,
+      "nombre": "armfwa",
+      "descripcion": "Escritorio de grandes dimensiones",
+      "materiales": [
+        "madera",
+        "metal"
+      ],
+      "dimensiones": [
+        168,
+        125,
+        73
+      ],
+      "precio": 157.99
+    },
+    {
+      "ID": 10,
+      "nombre": "regnskur",
+      "descripcion": "Lampara para techo ovalado verde",
+      "materiales": [
+        "madera"
+      ],
+      "dimensiones": [
+        50,
+        70,
+        30
+      ],
+      "precio": 24.99
+    },
+    {
+      "ID": 11,
+      "nombre": "skadis",
+      "descripcion": "Tablero perforado para colocar cosas",
+      "materiales": [
+        "fibras",
+        "pinturas acrilicas"
+      ],
+      "dimensiones": [
+        12,
+        13,
+        14
+      ],
+      "precio": 18.99
+    },
+    {
+      "ID": 12,
+      "nombre": "plafkq",
+      "descripcion": "Silla acolchada de tonos claros ",
+      "materiales": [
+        "piel sintetica"
+      ],
+      "dimensiones": [
+        62,
+        58,
+        102
+      ],
+      "precio": 27.99
+    },
+    {
+      "ID": 13,
+      "nombre": "kosv",
+      "descripcion": "Cama de matrimonio de matrimonio 200x200",
+      "materiales": [
+        "polialgodon",
+        "acero",
+        "madera"
+      ],
+      "dimensiones": [
+        200,
+        56,
+        220
+      ],
+      "precio": 538.99
+    },
+    {
+      "ID": 14,
+      "nombre": "aariqa",
+      "descripcion": "Lampara de pie negra",
+      "materiales": [
+        "acero"
+      ],
+      "dimensiones": [
+        32,
+        54,
+        147
+      ],
+      "precio": 31.99
+    },
+    {
+      "ID": 15,
+      "nombre": "gjatta",
+      "descripcion": "Caja morada para almacenar enseres",
+      "materiales": [
+        "poliester"
+      ],
+      "dimensiones": [
+        18,
+        25,
+        15
+      ],
+      "precio": 6.99
+    },
+    {
+      "ID": 16,
+      "nombre": "pluttis",
+      "descripcion": "Reloj de pared estilo clasico",
+      "materiales": [
+        "cristal",
+        "pvc"
+      ],
+      "dimensiones": [
+        6.8,
+        28,
+        28
+      ],
+      "precio": 4.99
+    },
+    {
+      "ID": 17,
+      "nombre": "opotsoa",
+      "descripcion": "Jarron de cristal ",
+      "materiales": [
+        "cristal"
+      ],
+      "dimensiones": [
+        12,
+        12,
+        17
+      ],
+      "precio": 2.99
+    },
+    {
+      "ID": 18,
+      "nombre": "mydale",
+      "descripcion": "Esctructura de madera para literas",
+      "materiales": [
+        "madera"
+      ],
+      "dimensiones": [
+        97,
+        206,
+        157
+      ],
+      "precio": 289.99
+    },
+    {
+      "ID": 19,
+      "nombre": "storhaga",
+      "descripcion": "Lampara de mesa",
+      "materiales": [
+        "acero"
+      ],
+      "dimensiones": [
+        15,
+        15,
+        44
+      ],
+      "precio": 54.99
+    },
+    {
+      "ID": 20,
+      "nombre": "nymane",
+      "descripcion": "Espejo de baño ",
+      "materiales": [
+        "cristal"
+      ],
+      "dimensiones": [
+        3.1,
+        50,
+        60
+      ],
+      "precio": 13.99
+    }
+  ]
+}

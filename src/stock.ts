@@ -78,13 +78,25 @@ export class Stock{
 
     crearCliente(){
         console.clear();
-        inquirer.prompt(
+        inquirer.prompt([
           { type: "input", 
-            name: "command", 
-            message: "Nuevo cliente o cliente existente:", 
-            })
+            name: "user", 
+            message: "Nombre nuevo cliente: ", 
+            },
+
+          { type: "input", 
+            name: "direction", 
+            message: "Direccion nuevo cliente: ", 
+            },
+
+          { type: "input", 
+            name: "conctact", 
+            message: "Contacto nuevo cliente: ", 
+            }
+        ])
         .then(answers => {
-          
+          let nuevoCliente = new Persona(this.GetClienteID(), answers.user, answers.conctact, answers.direction);
+          this.clientes.set(nuevoCliente.ID, nuevoCliente);
         })
       }
 

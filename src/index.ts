@@ -61,7 +61,7 @@ let TransacccionInicial: Transaccion[] = [
   new Transaccion(1, "Proveedor", [{mueble: new Mueble(21, "nymane", "Espejo de baño ", ["cristal"], [3.1, 50, 60], 13.99), cantidad: 1}], 0 , "Obtener", new Date(21-3-2001), 60)
 ]; 
 
-let stockDisponible: Stock = new jsonStock(StockInicial, 10, clientesIniciales, ProveedoresIniciales);
+let stockDisponible: Stock = new jsonStock(StockInicial, 10, clientesIniciales, ProveedoresIniciales, TransacccionInicial);
 
 /*
 function displayTodoList(): void {
@@ -130,7 +130,7 @@ function promptInteracturarClientes(): void {
   .then(answers => {
     switch(answers["command"]){
       case comandosClientes.nuevo_cliente:
-        //crear_cliente()
+        stockDisponible.crearCliente();
         //prompt_transaccion_cliente()
         promptUser();
         break;

@@ -1,0 +1,64 @@
+{
+  "proveedores": [
+    {
+      "ID": 1,
+      "nombre": "Proveedor1",
+      "contacto": "correo1@gmail.com",
+      "direccion": "avenida cosa nº1"
+    },
+    {
+      "ID": 2,
+      "nombre": "Proveedor2",
+      "contacto": "correo2@gmail.com",
+      "direccion": "avenida cosa nº2"
+    },
+    {
+      "ID": 3,
+      "nombre": "Proveedor3",
+      "contacto": "correo3@gmail.com",
+      "direccion": "avenida cosa nº3"
+    },
+    {
+      "ID": 4,
+      "nombre": "Proveedor4",
+      "contacto": "correo4@gmail.com",
+      "direccion": "avenida cosa nº4"
+    },
+    {
+      "ID": 5,
+      "nombre": "Proveedor5",
+      "contacto": "correo5@gmail.com",
+      "direccion": "avenida cosa nº5"
+    },
+    {
+      "ID": 6,
+      "nombre": "Proveedor6",
+      "contacto": "correo6@gmail.com",
+      "direccion": "avenida cosa nº6"
+    },
+    {
+      "ID": 7,
+      "nombre": "Proveedor7",
+      "contacto": "correo7@gmail.com",
+      "direccion": "avenida cosa nº7"
+    },
+    {
+      "ID": 8,
+      "nombre": "Proveedor8",
+      "contacto": "correo8@gmail.com",
+      "direccion": "avenida cosa nº8"
+    },
+    {
+      "ID": 9,
+      "nombre": "Proveedor9",
+      "contacto": "correo9@gmail.com",
+      "direccion": "avenida cosa nº9"
+    },
+    {
+      "ID": 10,
+      "nombre": "Proveedor10",
+      "contacto": "correo10@gmail.com",
+      "direccion": "avenida cosa nº10"
+    }
+  ]
+}

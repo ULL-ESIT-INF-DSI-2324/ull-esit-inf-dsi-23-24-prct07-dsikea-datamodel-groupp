@@ -28,12 +28,12 @@ import FileSync from "lowdb/adapters/FileSync.js";
  */
 export class Stock{
     
-    protected stock = new Map<Mueble, number>
+    protected stock = new Map<number, Mueble>
     protected clientes = new Map<number, Persona>
     protected proveedores = new Map<number, Persona>
     private transacciones = new Map<number, Transaccion>
 
-    constructor(public stock_: Mueble[] = [], public cantidad: number, 
+    constructor(public stock_: Mueble[] = [], 
         public clientes_: Persona[] = [], public proveedores_: Persona[] = [], public transaccion_: Transaccion[] = []){
         clientes_.forEach(cliente => this.clientes.set(cliente.ID,cliente));
         proveedores_.forEach(proveedor => this.proveedores.set(proveedor.ID, proveedor));
@@ -46,8 +46,8 @@ export class Stock{
 		 * @returns la cantidad del mueble
 		 */
     private GetCantidad(mueble:Mueble):number{
-        if(this.stock.has(mueble)){
-            return this.stock.get(mueble) as number;
+        if(this.stock.has(mueble.ID)){
+            return this.stock.get(mueble.ID)?.cantidad as number;
         }
         
         return -1;
@@ -74,6 +74,14 @@ export class Stock{
         while(true){
             result++;
             if(!this.transacciones.has(result)) break;
+        }
+        return result;
+    }
+    public GetMuebleID():number{
+        let result:number = 0;
+        while(true){
+            result++;
+            if(!this.stock.has(result)) break;
         }
         return result;
     }
@@ -106,26 +114,7 @@ export class Stock{
         //console.log("Imprimir dummy");
         return new Persona(0, "dummy", "dummy", "dummy");
       }
-
-
-    /**
-     * Devuelve un mueble a partir de su ID única
-     * @param ID Mueble que se está buscando
-     * @returns Mueble buscado
-     */
-    //Otra función para buscar por nombre, tipo y descripción, usar lenguajes regulares ahí, devolver Mueble[]
-    //Quiero que sea private pero debe ser publico para hacer test
     
-    public GetMueble(ID:number):Mueble{
-        for(var i of this.stock){
-            if(i[0].ID == ID){
-                return i[0];
-            }
-        }
-
-        //Mueble no encontrado
-        return new Mueble(0, "dummy", "dummy", ["nada"], [0], 0);
-    }
 
 		/**
 		 * Añade una unidad de mueble al stock
@@ -134,8 +123,8 @@ export class Stock{
 		 */
     private AddMueble(ID:number, cantidad:number):boolean{
         for(var i of this.stock){
-            if(i[0].ID == ID){
-                i[1] += cantidad;
+            if(i[0] == ID){
+                i[1].cantidad += cantidad;
                 return true;
             }
         }
@@ -151,9 +140,9 @@ export class Stock{
 		 */
     private QuitarMueble(ID:number, cantidad:number):boolean{
         for(var i of this.stock){
-            if(i[0].ID == ID){
-                if(i[1] >= cantidad){
-                    i[1] -= cantidad;
+            if(i[0] == ID){
+                if(i[1].cantidad >= cantidad){
+                    i[1].cantidad -= cantidad;
                     return true;
                 }else{
                     console.log("No quedan suficientes unidades de ese mueble");
@@ -181,13 +170,13 @@ export class Stock{
         let existe:boolean = false;
 
         for(var i of this.stock){
-            if(i[0].ID == mueble.ID){
+            if(i[0] == mueble.ID){
                 existe = true;
             }
         }
 
         if(existe == false){
-            this.stock.set(mueble, 1);
+            this.stock.set(this.GetMuebleID(), mueble);
             return true;
         }else{
             return false;

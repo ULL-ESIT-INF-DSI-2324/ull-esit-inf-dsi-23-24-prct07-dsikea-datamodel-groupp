@@ -6,22 +6,22 @@ import lowdb from "lowdb";
 import FileSync from "lowdb/adapters/FileSync.js"
 
 type schemaType = {
-  muebles: { ID: number, nombre: string, descripcion: string, materiales: string[], dimensiones: number[], precio: number}[]
+  muebles: { ID: number, nombre: string, descripcion: string, materiales: string[], dimensiones: number[], precio: number, cantidad:number}[]
   clientes: { ID: number, nombre: string, contacto: string, direccion: string}[]
   proveedores: { ID: number, nombre: string, contacto: string, direccion: string}[]
 };
 
 export class jsonStock extends Stock {
   private baseDatos: lowdb.LowdbSync<schemaType>;
-  constructor(public muebles: Mueble[] = [], cantidad: number, clientes: Persona[] = [], proveedores: Persona[] = [], transacciones: Transaccion[] = []){
-    super([], cantidad, [], [], []);
+  constructor(public muebles: Mueble[] = [], clientes: Persona[] = [], proveedores: Persona[] = [], transacciones: Transaccion[] = []){
+    super([], [], [], []);
     this.baseDatos = lowdb(new FileSync("stock.json"));
     if(this.baseDatos.has("muebles").value()) {
       let mueblesBaseDatos = this.baseDatos.get("muebles").value();
-      mueblesBaseDatos.forEach(item => this.stock.set(new Mueble(item.ID, item.nombre, item.descripcion, item.materiales, item.dimensiones, item.precio), cantidad));
+      mueblesBaseDatos.forEach(item => this.stock.set(item.ID, new Mueble(item.ID, item.nombre, item.descripcion, item.materiales, item.dimensiones, item.precio, item.cantidad)));
     } else {
       this.baseDatos.set("muebles", muebles).write();
-      muebles.forEach(item => this.stock.set(item, cantidad));
+      muebles.forEach(item => this.stock.set(item.ID, item));
     }
 
     this.baseDatos = lowdb(new FileSync("clientes.json"));

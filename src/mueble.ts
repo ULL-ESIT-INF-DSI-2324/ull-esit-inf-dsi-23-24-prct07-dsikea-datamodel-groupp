@@ -11,6 +11,6 @@
 export class Mueble {
 
 	constructor(public ID: number, public nombre: string, public descripcion: string, 
-		public materiales: string[], public dimensiones: number[], public precio: number) {
+		public materiales: string[], public dimensiones: number[], public precio: number, public cantidad:number) {
 	}
 }

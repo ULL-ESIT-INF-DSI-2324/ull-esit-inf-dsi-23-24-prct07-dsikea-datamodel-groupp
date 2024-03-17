@@ -12,23 +12,22 @@ let StockInicial: Mueble[] = [
   new Mueble( 5, "apoiuwe", "Mesa de noche de madera clara", ["madera"], [38, 42, 56], 74.99), 
   new Mueble( 6, "piwuu", "Cuadro portaretrato de pequeñas dimesiones", ["pvc", "cristal"], [2.40, 10, 15], 14.99), 
   new Mueble( 7, "vuqloa", "Espejo de tamaño cuerpo completo", ["acero", "cristal"], [68, 5.2, 180], 244.99), 
-  new Mueble( 8, "swyia", "Cama individual tamaño estandar", ["polialgodon", "acero", "madera"], [80, 53, 190], 138.99), 
+  new Mueble( 8, "swyia", "Cama individual tamaño estandar", ["polialgodon", "acero", "madera"], [80, 53, 190], 238.99), 
   new Mueble( 9, "armfwa", "Escritorio de grandes dimensiones", ["madera", "metal"], [168, 125, 73], 157.99), 
   new Mueble(10, "regnskur", "Lampara para techo ovalado verde", ["madera"], [50, 70, 30], 24.99), 
   new Mueble(11, "skadis", "Tablero perforado para colocar cosas", ["fibras", "pinturas acrilicas"], [12, 13, 14], 18.99), 
   new Mueble(12, "plafkq", "Silla acolchada de tonos claros ", ["piel sintetica"], [62, 58, 102], 27.99), 
-  new Mueble(13, "garugabksv", "Mesa pequeña negra", "madera", [12, 13, 14], 24.99), 
-  new Mueble(14, "garugabksv", "Mesa pequeña negra", "madera", [12, 13, 14], 24.99), 
-  new Mueble(15, "garugabksv", "Mesa pequeña negra", "madera", [12, 13, 14], 24.99), 
-  new Mueble(16, "garugabksv", "Mesa pequeña negra", "madera", [12, 13, 14], 24.99), 
-  new Mueble(17, "garugabksv", "Mesa pequeña negra", "madera", [12, 13, 14], 24.99), 
-  new Mueble(18, "garugabksv", "Mesa pequeña negra", "madera", [12, 13, 14], 24.99), 
-  new Mueble(19, "garugabksv", "Mesa pequeña negra", "madera", [12, 13, 14], 24.99), 
-  new Mueble(20, "garugabksv", "Mesa pequeña negra", "madera", [12, 13, 14], 24.99), 
+  new Mueble(13, "kosv", "Cama de matrimonio de matrimonio 200x200", ["polialgodon", "acero", "madera"], [200, 56, 220], 538.99), 
+  new Mueble(14, "aariqa", "Lampara de pie negra", ["acero"], [32, 54, 147], 31.99), 
+  new Mueble(15, "gjatta", "Caja morada para almacenar enseres", ["poliester"], [18, 25, 15], 6.99), 
+  new Mueble(16, "pluttis", "Reloj de pared estilo clasico", ["cristal", "pvc"], [6.8, 28, 28], 4.99), 
+  new Mueble(17, "opotsoa", "Jarron de cristal ", ["cristal"], [12, 12, 17], 2.99), 
+  new Mueble(18, "mydale", "Esctructura de madera para literas", ["madera"], [97, 206, 157], 289.99), 
+  new Mueble(19, "storhaga", "Lampara de mesa", ["acero"], [15, 15, 44], 54.99), 
+  new Mueble(20, "nymane", "Espejo de baño ", ["cristal"], [3.1, 50, 60], 13.99), 
 ];
 
 let collection: Stock = new JsonTodoCollection("Catalogo Disponible", todos);
-let showCompleted = true;
 
 
 function displayTodoList(): void {

@@ -32,7 +32,7 @@ let collection: TipoCantidad[] = new JsonTodoCollection("Catalogo Disponible", S
 
 
 function displayTodoList(): void {
-  console.log(`${collection.userName}'s Todo List `+ `(${ collection.getItemCounts().incomplete } items to do)`);
+  console.log(`${collection.userName}'s Todo List ` + `(${ collection.getItemCounts().incomplete } items to do)`);
   collection.getTodoItems(showCompleted).forEach(item => item.printDetails());
 }
 
@@ -176,7 +176,6 @@ function promptBusquedas(): void {
 
 function promptUser(): void {
   console.clear();
-  displayTodoList();
   inquirer.prompt({
     type: "list",
     name: "command",

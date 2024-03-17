@@ -23,11 +23,15 @@ import { Transaccion } from "./transacccion.js";
  */
 export class Stock{
     
-    private stock:TipoCantidad[];
+    protected stock = new Map<Mueble, number>
     private muebles:Mueble[];
     private transacciones:Transaccion[];
     private clientes:Persona[];
     private proveedores:Persona[];
+
+    constructor(public stock_: Mueble[] = [], public cantidad: number) {
+        stock_.forEach(mueble => this.stock.set(mueble, cantidad));
+      }
 
 		/**
 		 * funcion que devuelve la cantidad de muebles 

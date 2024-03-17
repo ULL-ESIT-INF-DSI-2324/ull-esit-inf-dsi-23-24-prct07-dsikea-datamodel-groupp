@@ -300,13 +300,63 @@ export class Stock{
     }
 
     //Buscar cliente por nombre, contacto o dirección
-    public BuscarCliente():Persona{
+    public BuscarCliente(criterio:"Nombre"|"Contacto"|"Direccion"|"ID", filtro:string|number):Persona{
+        if(criterio == "Nombre"){
+        for(var i of this.clientes){
+            if(i.Nombre == filtro){
+                return i;
+            }
+        }
+        }else if(criterio == "Contacto"){
+            for(var i of this.clientes){
+                if(i.Contacto == filtro){
+                    return i;
+                }
+            }
+        }else if(criterio == "Direccion"){
+            for(var i of this.clientes){
+                if(i.Direccion == filtro){
+                    return i;
+                }
+            }
+        }else if(criterio == "ID"){
+            for(var i of this.clientes){
+                if(i.ID == filtro){
+                    return i;
+                }
+            }
+        }   
         return this.clientes[0];
     }
 
     //Buscar proveedor por nombre, contacto o dirección
-    public BuscarProveedor():Persona{
-        return this.proveedores[0];
+    public BuscarProveedor(criterio:"Nombre"|"Contacto"|"Direccion"|"ID", filtro:string|number):Persona{
+        if(criterio == "Nombre"){
+            for(var i of this.proveedores){
+                if(i.Nombre == filtro){
+                    return i;
+                }
+            }
+            }else if(criterio == "Contacto"){
+                for(var i of this.proveedores){
+                    if(i.Contacto == filtro){
+                        return i;
+                    }
+                }
+            }else if(criterio == "Direccion"){
+                for(var i of this.proveedores){
+                    if(i.Direccion == filtro){
+                        return i;
+                    }
+                }
+            }else if(criterio == "ID"){
+                for(var i of this.proveedores){
+                    if(i.ID == filtro){
+                        return i;
+                    }
+                }
+            }   
+            return this.clientes[0];
     }
 
 }

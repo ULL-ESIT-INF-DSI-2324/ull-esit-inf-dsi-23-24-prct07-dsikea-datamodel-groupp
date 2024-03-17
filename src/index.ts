@@ -2,7 +2,6 @@ import { Mueble } from "./mueble.js";
 import { Stock } from "./stock.js";
 import { jsonStock } from "./jsonStock.js"
 import inquirer from 'inquirer';
-import { TipoCantidad } from "./tipoCantidad.js";
 
 
 let StockInicial: Mueble[] = [
@@ -28,13 +27,13 @@ let StockInicial: Mueble[] = [
   new Mueble(20, "nymane", "Espejo de baño ", ["cristal"], [3.1, 50, 60], 13.99), 
 ];
 
-let collection: Stock = new jsonStock(StockInicial, 10);
+let stockDisponible: Stock = new jsonStock(StockInicial, 10);
 
-
+/*
 function displayTodoList(): void {
-  console.log(`${collection.userName}'s Todo List ` + `(${ collection.getItemCounts().incomplete } items to do)`);
-  collection.getTodoItems(showCompleted).forEach(item => item.printDetails());
+  stockDisponible.getTodoItems(showCompleted).forEach(item => item.printDetails());
 }
+*/
 
 enum Commands {
   Interactuar_clientes = "Interacturar con un cliente",

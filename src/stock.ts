@@ -1,6 +1,5 @@
 import { Mueble } from "./mueble.js";
 import { Persona } from "./persona.js";
-import { TipoCantidad } from "./tipoCantidad.js";
 import { Transaccion } from "./transacccion.js";
 
 /**

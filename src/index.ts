@@ -130,9 +130,10 @@ function promptInteracturarClientes(): void {
   .then(answers => {
     switch(answers["command"]){
       case comandosClientes.nuevo_cliente:
+        console.log("A")
         stockDisponible.crearCliente();
         //prompt_transaccion_cliente()
-        promptUser();
+        //promptUser();
         break;
       case comandosClientes.cliente_existente:
       //buscar_cliente()

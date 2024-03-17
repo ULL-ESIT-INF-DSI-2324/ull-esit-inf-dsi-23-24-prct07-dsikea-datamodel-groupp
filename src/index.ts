@@ -130,8 +130,12 @@ function promptInteracturarClientes(): void {
   .then(answers => {
     switch(answers["command"]){
       case comandosClientes.nuevo_cliente:
-        console.log("A")
-        stockDisponible.crearCliente();
+
+        let clientesAnadidos:Persona[] = clientesIniciales;
+        let nuevocliente:Persona = stockDisponible.crearCliente();
+        clientesAnadidos.push(nuevocliente);
+
+        stockDisponible = new jsonStock(StockInicial, 10, clientesAnadidos, ProveedoresIniciales, TransacccionInicial);
         //prompt_transaccion_cliente()
         //promptUser();
         break;

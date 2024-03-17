@@ -78,8 +78,9 @@ export class Stock{
         return result;
     }
 
-    crearCliente(){
+    crearCliente():Persona{
         console.clear();
+
         inquirer.prompt([
           { type: "input", 
             name: "user", 
@@ -99,21 +100,11 @@ export class Stock{
         .then(answers => {
 
           let nuevoCliente = new Persona(this.GetClienteID(), answers.user, answers.conctact, answers.direction);
-          this.clientes.set(nuevoCliente.ID, nuevoCliente);
-
-          this.baseDatos = lowdb(new FileSync("clientes.json"));
-          if(this.baseDatos.has("clientes").value()) {
-            let clienteBaseDatos = this.baseDatos.get("clientes").value();
-            clienteBaseDatos.forEach(item => this.clientes.set(item.ID, new Persona(item.ID, item.nombre, item.contacto, item.direccion)));
-          } else {
-            this.baseDatos.set("clientes", clientes).write();
-            clientes.forEach(item => this.clientes.set(item.ID, item));
-          }
-
-
-
-
+          //console.log("No dummy");
+          return nuevoCliente;
         })
+        //console.log("Imprimir dummy");
+        return new Persona(0, "dummy", "dummy", "dummy");
       }
 
 

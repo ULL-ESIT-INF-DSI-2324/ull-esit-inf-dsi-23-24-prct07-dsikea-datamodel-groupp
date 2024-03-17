@@ -356,7 +356,7 @@ export class Stock{
                     }
                 }
             }   
-            return this.clientes[0];
+            return this.proveedores[0];
     }
 
 }

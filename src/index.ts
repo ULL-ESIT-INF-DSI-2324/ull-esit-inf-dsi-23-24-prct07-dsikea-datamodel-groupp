@@ -2,6 +2,7 @@ import { Mueble } from "./mueble.js";
 import { TodoCollection } from "./todoCollection.js";
 import { JsonTodoCollection } from "./jsonTodoCollection.js"
 import inquirer from 'inquirer';
+import { TipoCantidad } from "./tipoCantidad.js";
 
 
 let StockInicial: Mueble[] = [
@@ -27,7 +28,7 @@ let StockInicial: Mueble[] = [
   new Mueble(20, "nymane", "Espejo de baño ", ["cristal"], [3.1, 50, 60], 13.99), 
 ];
 
-let collection: Stock = new JsonTodoCollection("Catalogo Disponible", todos);
+let collection: TipoCantidad[] = new JsonTodoCollection("Catalogo Disponible", StockInicial);
 
 
 function displayTodoList(): void {

@@ -36,7 +36,7 @@ export class Stock{
 		 */
     private GetCantidad(ID:number):number{
         for(var i of this.stock){
-            if(ID == i.MuebleID){
+            if(ID == i.Mueble){
                 return i.Cantidad;
             }
         }
@@ -69,7 +69,7 @@ export class Stock{
 		 */
     private AddMueble(ID:number):boolean{
         for(var i of this.stock){
-            if(i.MuebleID == ID){
+            if(i.Mueble == ID){
                 i.Cantidad++;
                 return true;
             }
@@ -86,7 +86,7 @@ export class Stock{
 		 */
     private QuitarMueble(ID:number):boolean{
         for(var i of this.stock){
-            if(i.MuebleID == ID){
+            if(i.Mueble == ID){
                 if(i.Cantidad > 0){
                     i.Cantidad--;
                     return true;
@@ -116,13 +116,13 @@ export class Stock{
         let existe:boolean = false;
 
         for(var i of this.stock){
-            if(i.MuebleID == mueble.ID){
+            if(i.Mueble == mueble.ID){
                 existe = true;
             }
         }
 
         if(existe == false){
-            this.stock.push({MuebleID:mueble.ID, Cantidad:1});
+            this.stock.push({Mueble:mueble.ID, Cantidad:1});
             this.muebles.push(mueble);
             return true;
         }else{
@@ -141,15 +141,15 @@ export class Stock{
 
         //Sección de errores
         for(var ID of IDs){
-            if(this.GetMueble(ID.MuebleID).nombre == "dummy") return false;
-            if(ID.Cantidad > this.GetCantidad(ID.MuebleID) || ID.Cantidad <= 0) return false;
+            if(this.GetMueble(ID.Mueble).nombre == "dummy") return false;
+            if(ID.Cantidad > this.GetCantidad(ID.Mueble) || ID.Cantidad <= 0) return false;
         }
         
         //Añadir coste al total y quitarlo del stock
         let coste:number = 0;
         for(var ID of IDs){
-            coste += this.GetMueble(ID.MuebleID).precio;
-            this.QuitarMueble(ID.MuebleID);
+            coste += this.GetMueble(ID.Mueble).precio;
+            this.QuitarMueble(ID.Mueble);
         }
         
         //La persona es un cliente, cambiar por BuscarCliente
@@ -185,15 +185,15 @@ export class Stock{
 
         //Sección de errores
         for(var ID of IDs){
-            if(this.GetMueble(ID.MuebleID).nombre == "dummy") return false;
+            if(this.GetMueble(ID.Mueble).nombre == "dummy") return false;
             if(ID.Cantidad <= 0) return false;
         }
 
         //Añadir coste al total y quitarlo del stock
         let coste:number = 0;
         for(var ID of IDs){
-            coste += this.GetMueble(ID.MuebleID).precio;
-            this.AddMueble(ID.MuebleID);
+            coste += this.GetMueble(ID.Mueble).precio;
+            this.AddMueble(ID.Mueble);
         }
 
         //La persona es un cliente, cambiar por BuscarCliente
@@ -276,7 +276,7 @@ export class Stock{
 
                     encontrado = false;
                     for(let i = 0; i < Cantidades.length; i++){
-                        if(venta.MuebleID == Cantidades[i].MuebleID){
+                        if(venta.Mueble == Cantidades[i].Mueble){
                             Cantidades[i].Cantidad += venta.Cantidad;
                             encontrado = true;
                         }

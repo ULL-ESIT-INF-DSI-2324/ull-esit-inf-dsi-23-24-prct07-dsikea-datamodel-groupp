@@ -12,6 +12,10 @@ import { Transaccion } from "./transacccion.js";
  * Documentación y Sonarcloud
  */
 
+interface TipoCantidad{
+    
+}
+
 /**
  * @class Stock es la clase que gestiona el stock que tenemos en nuestro almacen
  * @param stock señala el conjunto de muebles que poseemos
@@ -150,7 +154,7 @@ export class Stock{
         let coste:number = 0;
         for(var ID of IDs){
             coste += this.GetMueble(ID.Mueble).precio;
-            this.QuitarMueble(ID.Mueble);
+            this.QuitarMueble(ID.Mueble, ID.Cantidad);
         }
         
         //La persona es un cliente, cambiar por BuscarCliente

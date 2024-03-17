@@ -11,10 +11,33 @@ Daniel Marhuenda Guillén, [alu0101487731@ull.edu.es](https://github.com/alu0101
 
 ## Introducción
 
-En esta práctica nos encargamos de gestionar una tienda de muebles, donde gestionamos las adquisiciones y/o ventas respecto a nuestros clientes y proveedores.
+En esta práctica nos encargamos de gestionar una tienda de muebles, por ello, nos encargamos de diferentes tareas, como pueden ser:
+
+- Gestionar nuestro stock disponible: revisar los muebles que tenemos y sus cantidades, añadimos o retiramos muebles
+- Realizamos transacciones: asi como la compra/venta de muebles con clientes y/o proveedores
+  - Factuaracion: generamos facturas que pueden revisar los diferentes detalles de la transaccion
+
 
 ## Implementación Conceptual
 
+Empezamos por crear las clases mas elementales en nuestro programa: **Mueble**, **Persona**, **Transaccion**, **Stock**.
+
+En la clase **Mueble**, nos dedicamos a dar formato sobre los muebles que manejamos, definiendo sus principales caracteristicas por unidad.
+
+En la clase **Persona**, tratamos de definir los tipos de personas que se podrian dirigir de forma externa a nuestro programa, y en ello encontramos 2 perfiles: _Clientes_ y _Proveedores_.  
+Los _Clientes_ podran comprar muebles de nuestro stock, o en caso contrario, vendernos muebles que tengamos registrados en nuestro stock, mientras que los _proveedores_ nos suministraran muebles que nosotros venderemos, o en caso contrario, adquiriran muebles que no vamos a vender.
+
+En la clase **Transaccion**, nos encargamos de definir las principales caracteristicas que existen en una transaccion: muebles, sus precios y cantidades, clientes o proveedores con los que interactuamos, fecha de la transacion, etc...
+
+En la clase **Stock**, se manejara nuestros muebles, de forma que almacenara que muebles existen en nuestro stock y su cantidad, ademas de tratar las transacciones en ella.
+
+A parte de estas cuatro clase principales, incluimos mas ficheros relevantes para el funcionamiento del programa.
+
+En el fichero **_index.ts_** proporcionamos una interfaz grafica interatuable sobre nuestro programa, en ella nos encargamos de dirigir sobre las diferentes acciones que se pueden realizar en nuestro programa relativo a nuestros clientes, proveedores, muebles, transacciones, stock, etc...
+
+Ademas contamos con el fichero **_jsonStock.ts_** que nos facilita es uso de ficheros.json sobre las diferentes transacciones que realizamos sobre nuestro productos.
+
+-----------------------------------------------------------------------------------------------------------------
 
 En esta tarea hemos tenido que hacer el gestor de una tienda de muebles, creando las clases mueble, cliente, proveedor y stock:
 
@@ -26,6 +49,10 @@ En la clase Stock está todo el trabajo, esta clase tiene tres listas: el stock,
 
 
 ## Implementación sobre el código
+
+POR DEFINIR
+
+------------------------------------------------------------------------------------------------------------------
 
 Las clases Mueble, Cliente y Proveedor no tienen funciones propias más que el constructor ya que no se trabajará modificándolas, sólo guardándolas.
 
@@ -48,6 +75,6 @@ Esto último se podría hacer con menos código usando una clase padre Persona c
 
 Para este ultimo punto, he recopilado algunas de las paginas que me han sido utiles para los ejercicos de la _práctica_:
 
-1. **Aprendizaje sobre _inquirer_ y _lowdb_** [https://learning-oreilly-com.accedys2.bbtk.ull.es/library/view/essential-typescript-4/9781484270110/html/481342_2_En_1_Chapter.xhtml](https://learning-oreilly-com.accedys2.bbtk.ull.es/library/view/essential-typescript-4/9781484270110/html/481342_2_En_1_Chapter.xhtml)
+1. **Aprendizaje sobre _inquirer_ y _lowdb_:** [https://learning-oreilly-com.accedys2.bbtk.ull.es/library/view/essential-typescript-4/9781484270110/html/481342_2_En_1_Chapter.xhtml](https://learning-oreilly-com.accedys2.bbtk.ull.es/library/view/essential-typescript-4/9781484270110/html/481342_2_En_1_Chapter.xhtml)
 2. **ref2** []()
 3. **ref3** []()

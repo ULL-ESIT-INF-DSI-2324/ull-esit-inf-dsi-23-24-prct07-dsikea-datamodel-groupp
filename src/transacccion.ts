@@ -1,3 +1,4 @@
+import { TipoCantidad } from "./tipoCantidad.js";
 
 /**
  * @interface Transaccion es una colección que

@@ -24,7 +24,7 @@ import { Transaccion } from "./transacccion.js";
 export class Stock{
     
     protected stock = new Map<Mueble, number>
-    private muebles:Mueble[];
+    //private muebles:Mueble[];
     private transacciones:Transaccion[];
     private clientes:Persona[];
     private proveedores:Persona[];

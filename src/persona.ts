@@ -8,9 +8,6 @@
  * @param Direccion concreta una dirrecion sobre la que establecer contacto de forma presencial
  */
 export class Persona {
-
   constructor(public ID: number, public nombre: string, public contacto: string, public direccion: string) {}
-
-
 }
 

@@ -27,13 +27,15 @@ import inquirer from "inquirer";
 export class Stock{
     
     protected stock = new Map<Mueble, number>
-    //private muebles:Mueble[];
-    private transacciones:Transaccion[];
-    private clientes:Persona[];
-    private proveedores:Persona[];
+    protected clientes = new Map<number, Persona>
+    protected proveedores = new Map<number, Persona>
+    private transacciones = new Map<number, Transaccion>
 
-    constructor(public stock_: Mueble[] = [], public cantidad: number) {
-        stock_.forEach(mueble => this.stock.set(mueble, cantidad));
+    constructor(public stock_: Mueble[] = [], public cantidad: number, 
+        public clientes_: Persona[] = [], public proveedores_: Persona[] = [], public transaccion_: Transaccion[] = []){
+        clientes_.forEach(cliente => this.clientes.set(cliente.ID,cliente));
+        proveedores_.forEach(proveedor => this.proveedores.set(proveedor.ID, proveedor));
+        transaccion_.forEach(transaccion => this.transacciones.set(transaccion.ID, transaccion))
       }
 
 		/**

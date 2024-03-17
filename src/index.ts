@@ -1,7 +1,9 @@
 import { Mueble } from "./mueble.js";
 import { Stock } from "./stock.js";
 import { jsonStock } from "./jsonStock.js"
+import { Persona } from "./persona.js"
 import inquirer from 'inquirer';
+import { Transaccion } from "./transacccion.js";
 
 
 let StockInicial: Mueble[] = [
@@ -27,7 +29,39 @@ let StockInicial: Mueble[] = [
   new Mueble(20, "nymane", "Espejo de baño ", ["cristal"], [3.1, 50, 60], 13.99), 
 ];
 
-let stockDisponible: Stock = new jsonStock(StockInicial, 10);
+let clientesIniciales: Persona[] = [
+  new Persona( 1, "Cliente1", "correo1@gmail.com", "calle cosa nº1"), 
+  new Persona( 2, "Cliente2", "correo2@gmail.com", "calle cosa nº2"),  
+  new Persona( 3, "Cliente3", "correo3@gmail.com", "calle cosa nº3"),  
+  new Persona( 4, "Cliente4", "correo4@gmail.com", "calle cosa nº4"),  
+  new Persona( 5, "Cliente5", "correo5@gmail.com", "calle cosa nº5"),  
+  new Persona( 6, "Cliente6", "correo6@gmail.com", "calle cosa nº6"),  
+  new Persona( 7, "Cliente7", "correo7@gmail.com", "calle cosa nº7"),  
+  new Persona( 8, "Cliente8", "correo8@gmail.com", "calle cosa nº8"),  
+  new Persona( 9, "Cliente9", "correo9@gmail.com", "calle cosa nº9"),  
+  new Persona(10, "Cliente10", "correo10@gmail.com", "calle cosa nº10"),  
+
+];
+
+let ProveedoresIniciales: Persona[] = [
+  new Persona( 1, "Proveedor1", "correo1@gmail.com", "avenida cosa nº1"),
+  new Persona( 2, "Proveedor2", "correo2@gmail.com", "avenida cosa nº2"),
+  new Persona( 3, "Proveedor3", "correo3@gmail.com", "avenida cosa nº3"),
+  new Persona( 4, "Proveedor4", "correo4@gmail.com", "avenida cosa nº4"),
+  new Persona( 5, "Proveedor5", "correo5@gmail.com", "avenida cosa nº5"),
+  new Persona( 6, "Proveedor6", "correo6@gmail.com", "avenida cosa nº6"),
+  new Persona( 7, "Proveedor7", "correo7@gmail.com", "avenida cosa nº7"),
+  new Persona( 8, "Proveedor8", "correo8@gmail.com", "avenida cosa nº8"),
+  new Persona( 9, "Proveedor9", "correo9@gmail.com", "avenida cosa nº9"),
+  new Persona(10, "Proveedor10", "correo10@gmail.com", "avenida cosa nº10"),
+ 
+];
+
+let TransacccionInicial: Transaccion[] = [
+  new Transaccion(1, "Proveedor", [{mueble: new Mueble(21, "nymane", "Espejo de baño ", ["cristal"], [3.1, 50, 60], 13.99), cantidad: 1}], 0 , "Obtener", new Date(21-3-2001), 60)
+]; 
+
+let stockDisponible: Stock = new jsonStock(StockInicial, 10, clientesIniciales, ProveedoresIniciales);
 
 /*
 function displayTodoList(): void {

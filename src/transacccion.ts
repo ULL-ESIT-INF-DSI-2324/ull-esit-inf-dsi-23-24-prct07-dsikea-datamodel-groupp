@@ -5,10 +5,14 @@ import { TipoCantidad } from "./tipoCantidad.js";
  * define que atributos tienen los objetos de `Transaccion`
  */
 export class Transaccion {
-  Persona: "Cliente"|"Proveedor";
-  Cantidades: TipoCantidad[];
-  PersonaID: number;
-  Accion: "Obtener"|"Dar";
-  Fecha: Date;
-  Importe: number;
+
+  constructor (  
+    public ID: number,
+    public Persona: "Cliente"|"Proveedor",
+    public Cantidades: TipoCantidad[],
+    public PersonaID: number,
+    public Accion: "Obtener"|"Dar",
+    public Fecha: Date,
+    public Importe: number
+    ){}
 }

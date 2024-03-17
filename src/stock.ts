@@ -1,6 +1,7 @@
 import { Mueble } from "./mueble.js";
 import { Persona } from "./persona.js";
 import { Transaccion } from "./transacccion.js";
+import { TipoCantidad } from "./tipoCantidad.js";
 
 /**
  * Cosas por hacer

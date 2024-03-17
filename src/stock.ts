@@ -37,12 +37,11 @@ export class Stock{
 		 * @param ID el identificador del mueble
 		 * @returns la cantidad del mueble
 		 */
-    private GetCantidad(ID:number):number{
-        for(var i of this.stock){
-            if(ID == i.Mueble){
-                return i.Cantidad;
-            }
+    private GetCantidad(mueble:Mueble):number{
+        if(this.stock.has(mueble)){
+            return this.stock.get(mueble) as number;
         }
+        
         return -1;
     }
 
@@ -55,9 +54,9 @@ export class Stock{
     //Quiero que sea private pero debe ser publico para hacer test
     
     public GetMueble(ID:number):Mueble{
-        for(var i of this.muebles){
-            if(i.ID == ID){
-                return i;
+        for(var i of this.stock){
+            if(i[0].ID == ID){
+                return i[0];
             }
         }
 
@@ -70,10 +69,10 @@ export class Stock{
 		 * @param ID el identificador del mueble a añadir
 		 * @returns true si el mueble ha sido añadido correctamente, false en otro caso
 		 */
-    private AddMueble(ID:number):boolean{
+    private AddMueble(ID:number, cantidad:number):boolean{
         for(var i of this.stock){
-            if(i.Mueble == ID){
-                i.Cantidad++;
+            if(i[0].ID == ID){
+                i[1] += cantidad;
                 return true;
             }
         }
@@ -87,14 +86,14 @@ export class Stock{
 		 * @param ID el identificador del mueble a eliminar
 		 * @returns true si se ha podido eliminar correctamente, false en otro caso
 		 */
-    private QuitarMueble(ID:number):boolean{
+    private QuitarMueble(ID:number, cantidad:number):boolean{
         for(var i of this.stock){
-            if(i.Mueble == ID){
-                if(i.Cantidad > 0){
-                    i.Cantidad--;
+            if(i[0].ID == ID){
+                if(i[1] >= cantidad){
+                    i[1] -= cantidad;
                     return true;
                 }else{
-                    console.log("No quedan unidades de ese mueble");
+                    console.log("No quedan suficientes unidades de ese mueble");
                     return false;
                 }
             }
@@ -119,14 +118,13 @@ export class Stock{
         let existe:boolean = false;
 
         for(var i of this.stock){
-            if(i.Mueble == mueble.ID){
+            if(i[0].ID == mueble.ID){
                 existe = true;
             }
         }
 
         if(existe == false){
-            this.stock.push({Mueble:mueble.ID, Cantidad:1});
-            this.muebles.push(mueble);
+            this.stock.set(mueble, 1);
             return true;
         }else{
             return false;

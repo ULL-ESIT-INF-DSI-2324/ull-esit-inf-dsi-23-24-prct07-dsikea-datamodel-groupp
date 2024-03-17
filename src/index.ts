@@ -43,15 +43,17 @@ enum comandosPrincipales {
   Quit = "Quit"
 }
 
-enum Commands {
-  
+enum comandosClientes {
   nuevo_cliente = "Cliente nuevo",
-      // crear_cliente
+  // crear_cliente
   cliente_existente = "Cliente registrado",
-      // buscar_cliente
-        // vender mueble
-        // devolver mueble
-  
+  // buscar_cliente
+    // vender mueble
+    // devolver mueble
+  Quit = "Quit"
+}
+
+enum comandosProveedores {
   nuevo_proveedor = "Proveedor nuevo",
     //crear proveedor
   proveedor_existente = "Proveedor registrado",
@@ -59,12 +61,19 @@ enum Commands {
       // Comprar mueble
       // Añadir mueble existente
       // Añadir nuevo mueble 
-  
+  Quit = "Quit"
+}
+
+enum comandosBusquedas{
   Categoria_mueble = "Busqueda por una categoria de mueble concreta",
   Concreto_mueble = "Busqueda de un mueble en concreto", 
   Mueble_mas_vendidos = "Busqueda por los muebles mas vendidos",
   Ultimas_transacciones = "Busquedas por venta a clientes, compra a proveedores, fecha",
   Historico_persona = "Busquedas por persona concreta",
+  Quit = "Quit"
+}
+
+enum comandosFiltros {
   
   Muebles = "Filtra sobre muebles", //(orden alfabetico y precio, ascendente o descendente)
       //nombre
@@ -83,15 +92,15 @@ enum Commands {
 
 function promptInteracturarClientes(): void {
   console.clear();
-  inquirer.prompt({ type: "list", name: "interact", message: "Nuevo cliente o cliente existente:"})
+  inquirer.prompt({ type: "list", name: "command", message: "Nuevo cliente o cliente existente:", choices: Object.values(comandosClientes)})
   .then(answers => {
-    switch(answers["interact"]){
-      case Commands.nuevo_cliente:
+    switch(answers["command"]){
+      case comandosClientes.nuevo_cliente:
         //crear_cliente()
         //prompt_transaccion_cliente()
         promptUser();
         break;
-      case Commands.cliente_existente:
+      case comandosClientes.cliente_existente:
       //buscar_cliente()
       //prompt_transaccion_cliente()  
       promptUser();
@@ -102,15 +111,15 @@ function promptInteracturarClientes(): void {
 
 function promptInteracturarProveedores(): void {
   console.clear();
-  inquirer.prompt({ type: "list", name: "interact", message: "Nuevo proveedor o proveedor existente:"})
+  inquirer.prompt({ type: "list", name: "interact", message: "Nuevo proveedor o proveedor existente:", choices: Object.values(comandosProveedores)})
   .then(answers => {
     switch(answers["interact"]){
-      case Commands.nuevo_proveedor:
+      case comandosProveedores.nuevo_proveedor:
         //crear_proveedor()
         //prompt_transaccion_proveedor()
         promptUser();
         break;
-      case Commands.proveedor_existente:
+      case comandosProveedores.proveedor_existente:
       //buscar_proveedor()
       //prompt_transaccion_cliente()  
       promptUser();
@@ -121,26 +130,26 @@ function promptInteracturarProveedores(): void {
 
 function promptInformes(): void {
   console.clear();
-  inquirer.prompt({ type: "list", name: "informes", message: "Seleccione filtros de informes a buscar: "})
+  inquirer.prompt({ type: "list", name: "informes", message: "Seleccione filtros de informes a buscar: ", choices: Object.values(comandosBusquedas)})
   .then(answers => {
     switch(answers["informes"]){
-      case Commands.Categoria_mueble:
+      case comandosBusquedas.Categoria_mueble:
         // buscador()
         promptUser();
         break;
-      case Commands.Concreto_mueble:
+      case comandosBusquedas.Concreto_mueble:
         // buscador()
         promptUser();
         break;
-      case Commands.Mueble_mas_vendidos:
+      case comandosBusquedas.Mueble_mas_vendidos:
         // buscador()
         promptUser();
         break;
-      case Commands.Ultimas_transacciones:
+      case comandosBusquedas.Ultimas_transacciones:
         // buscador()
         promptUser();
         break;
-      case Commands.Historico_persona:
+      case comandosBusquedas.Historico_persona:
         // buscador()
         promptUser();
         break;
@@ -150,10 +159,10 @@ function promptInformes(): void {
 
 function promptBusquedas(): void {
   console.clear();
-  inquirer.prompt({ type: "list", name: "busquedas", message: "Seleccione filtro de busqueda en productos: "})
+  inquirer.prompt({ type: "list", name: "busquedas", message: "Seleccione filtro de busqueda en productos: ", choices: Object.values(comandosFiltros)})
   .then(answers => {
     switch(answers["busquedas"]){
-      case Commands.Muebles:
+      case comandosFiltros.Muebles:
         // console.out(todos los muebles y tal)
         // filtrar()
           // tipos de filtros: id, nombre, tipo, descripcion
@@ -163,14 +172,14 @@ function promptBusquedas(): void {
         // buscador()
         promptUser();
         break;
-      case Commands.Proveedor:
+      case comandosFiltros.Proveedor:
         // console.out(todos los proveedores y tal)
         // filtrar()
           // tipos de filtros: nombre, contacto, direccion
         // buscador()
         promptUser();
         break;
-      case Commands.Cliente:
+      case comandosFiltros.Cliente:
         // console.out(todos los clientes y tal)
         // filtrar()
           // tipos de filtros: nombre, contacto, direccion

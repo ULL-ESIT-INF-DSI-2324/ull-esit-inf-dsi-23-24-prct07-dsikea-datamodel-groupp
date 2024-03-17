@@ -45,7 +45,7 @@ export class Stock{
 		 * @param ID el identificador del mueble
 		 * @returns la cantidad del mueble
 		 */
-    private GetCantidad(mueble:Mueble):number{
+    public GetCantidad(mueble:Mueble):number{
         if(this.stock.has(mueble.ID)){
             return this.stock.get(mueble.ID)?.cantidad as number;
         }
@@ -55,6 +55,11 @@ export class Stock{
 
     public GetMueble(id:number){
         return this.stock.get(id) as Mueble;
+    }
+
+    public NuevoCliente(cliente:Persona):boolean{
+        this.clientes.set(this.GetClienteID(), cliente);
+        return true;
     }
 
     public GetClienteID():number{
@@ -125,7 +130,8 @@ export class Stock{
 		 * @param ID el identificador del mueble a añadir
 		 * @returns true si el mueble ha sido añadido correctamente, false en otro caso
 		 */
-    private AddMueble(ID:number, cantidad:number):boolean{
+    public AddMueble(ID:number, cantidad:number):boolean{
+        if(cantidad <= 0) return false;
         for(var i of this.stock){
             if(i[0] == ID){
                 i[1].cantidad += cantidad;
@@ -142,7 +148,8 @@ export class Stock{
 		 * @param ID el identificador del mueble a eliminar
 		 * @returns true si se ha podido eliminar correctamente, false en otro caso
 		 */
-    private QuitarMueble(ID:number, cantidad:number):boolean{
+    public QuitarMueble(ID:number, cantidad:number):boolean{
+        if(cantidad <= 0) return false;
         for(var i of this.stock){
             if(i[0] == ID){
                 if(i[1].cantidad >= cantidad){

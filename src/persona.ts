@@ -6,15 +6,6 @@
  * @param Direccion concreta una dirrecion sobre la que establecer contacto de forma presencial
  */
 export class Persona {
-  ID: number = 0;
-  Nombre: string = "";
-  Contacto: string = "";
-  Direccion: string = "";
 
-  constructor(ID: number, nombre: string, contacto: string, direccion: string) {
-    this.ID = ID;
-    this.Nombre = nombre;
-    this.Contacto = contacto;
-    this.Direccion = direccion;
-  }
+  constructor(public ID: number, public nombre: string, public contacto: string, public direccion: string) {}
 }

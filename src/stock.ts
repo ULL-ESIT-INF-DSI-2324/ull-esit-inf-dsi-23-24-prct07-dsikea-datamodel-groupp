@@ -61,6 +61,10 @@ export class Stock{
         this.clientes.set(this.GetClienteID(), cliente);
         return true;
     }
+    public NuevoProveedor(proveedor:Persona):boolean{
+        this.proveedores.set(this.GetProveedorID(), proveedor);
+        return true;
+    }
 
     public GetClienteID():number{
         let result:number = 0;

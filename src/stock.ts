@@ -3,19 +3,6 @@ import { Persona } from "./persona.js";
 import { Transaccion } from "./transacccion.js";
 import { TipoCantidad } from "./tipoCantidad.js";
 import inquirer from "inquirer";
-import lowdb from "lowdb";
-import FileSync from "lowdb/adapters/FileSync.js";
-
-
-/**
- * Cosas por hacer
- * Funciones BuscarCliente BuscarProveedor (Por expresiones regulares)
- * Funcion BuscarMueble información se podrá mostrar ordenada alfabéticamente y por precio, 
- * tanto ascendente como descendente, en ambos casos.
- * Informes, todos faltan, cuando alguno hecho porner aquí,
- * Inquirer.js y Lowdb
- * Documentación y Sonarcloud
- */
 
 
 /**

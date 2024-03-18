@@ -37,22 +37,9 @@ En el fichero **_index.ts_** proporcionamos una interfaz grafica interatuable so
 
 Ademas contamos con el fichero **_jsonStock.ts_** que nos facilita es uso de ficheros.json sobre las diferentes transacciones que realizamos sobre nuestro productos.
 
------------------------------------------------------------------------------------------------------------------
-
-En esta tarea hemos tenido que hacer el gestor de una tienda de muebles, creando las clases mueble, cliente, proveedor y stock:
-
-Mueble tiene su ID único, un nombre común, una descripción, el material del que está hecho, sus dimenciones y su precio. Nada interesante que comentar en este respecto.
-
-Cliente y Proveedor tienen su ID único, su nombre, su contacto y su dirección, no hay diferencias entre las dos clases.
-
-En la clase Stock está todo el trabajo, esta clase tiene tres listas: el stock, dónde se guarda cuantas unidades hay de cada mueble por su ID para seguridad(No nos parecía buena idea que en devolución el supuesto cliente pudiera crear un nuevo mueble propio), muebles, donde se guardan los propios objetos de tipo mueble, y transacciones, donde se guardan las transacciones realizadas.
-
 
 ## Implementación sobre el código
 
-POR DEFINIR
-
-------------------------------------------------------------------------------------------------------------------
 
 Las clases Mueble, Cliente y Proveedor no tienen funciones propias más que el constructor ya que no se trabajará modificándolas, sólo guardándolas.
 
@@ -69,12 +56,14 @@ Esto último se podría hacer con menos código usando una clase padre Persona c
 
 ## Conclusiones
 
+Hemos realizado gran parte del ejercicio planteado pero vamos a comentar sobre los diferentes puntos que no pudimos desarrollar completamente:
 
+- Aplicamos las interfaces interactivas del paquete _inquirer_ pero no terminamos de adaptar todos los submenus referente a las posibles acciones a tomar en el programa
+- Nos encargamos de aplicar el paquete _lowdb_ para almacenar los clientes, proveedores y muebles en ellos, pero no nos dio tiempo de poder modificar dichos ficheros
+- Nos encargamos de desarrollar bastantes tests sobre el programa, pero mucha parte del codigo dado su implementacion, no supimos como comprobarla mediante tests
 
 ## Bibliografía
 
 Para este ultimo punto, he recopilado algunas de las paginas que me han sido utiles para los ejercicos de la _práctica_:
 
 1. **Aprendizaje sobre _inquirer_ y _lowdb_:** [https://learning-oreilly-com.accedys2.bbtk.ull.es/library/view/essential-typescript-4/9781484270110/html/481342_2_En_1_Chapter.xhtml](https://learning-oreilly-com.accedys2.bbtk.ull.es/library/view/essential-typescript-4/9781484270110/html/481342_2_En_1_Chapter.xhtml)
-2. **ref2** []()
-3. **ref3** []()

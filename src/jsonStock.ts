@@ -11,6 +11,10 @@ type schemaType = {
   proveedores: { ID: number, nombre: string, contacto: string, direccion: string}[]
 };
 
+/**
+ * @class jsonStock trata de aplicar una base de datos sobre la clase stock
+ * que nos permite registrar datos en ficheros.json
+ */
 export class jsonStock extends Stock {
   private baseDatos: lowdb.LowdbSync<schemaType>;
   constructor(public muebles: Mueble[] = [], clientes: Persona[] = [], proveedores: Persona[] = [], transacciones: Transaccion[] = []){
